@@ -26,7 +26,7 @@ department appears **(pic 1.1)**.
 * User select item Employees;
 * Application open employees list.
 
-![list_employees](./list_employees.png)
+![list_employees](./search_period.png)
 **pic 1.1 - View the employees list**
 
 The list displays the following columns:
@@ -51,7 +51,7 @@ For date search user have 2 mods.
    * User must check **Period** and writes dates. 
    * Then click search and list will appear (pic 1.3).
    
-![search_period](./search_period.png)
+![search_period](./list_employees.png)
 **pic 1.3 - View the employees list by period**
 
 For dropping date and period lists user can click button **Drop**.
