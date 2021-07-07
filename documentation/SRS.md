@@ -1,6 +1,6 @@
-#Manager for department and employees
+# Manager for department and employees
 
-##Vision
+## Vision
 
 This application is web-application that helps 
 navigate in information about employees and 
@@ -16,13 +16,13 @@ departments in database;
 * Updating departments data (add,editing,delete);
 * Filtering by date of birthday and period of dates.
 
-##1. Employees
+## 1. Employees
 ### 1.1 Display list about employees
 The mode is designed to view list of employees in department.
 When user selects a department, a list of employees for that 
 department appears **(pic 1.1)**.
 
-####*Main scenario*
+#### *Main scenario*
 * User select item Employees;
 * Application open employees list.
 
@@ -37,7 +37,7 @@ The list displays the following columns:
 ### 1.2 Search by date and period
 For date search user have 2 mods.
 
-####*Main scenario*
+#### *Main scenario*
 1. Search by birthday:
    
    * User must uncheck **Period** and writes date
@@ -58,7 +58,7 @@ For dropping date and period lists user can click button **Drop**.
 
 ### 1.3 Add employee
 
-####*Main scenario*
+#### *Main scenario*
 * User clicks button **Add**;
 * Application displays form for adding;
 * User enters information and presses **Save**;
@@ -68,7 +68,7 @@ For dropping date and period lists user can click button **Drop**.
 ![add_form](./add_employee.png)
 **pic 1.4 - View the form for adding**
 
-####*Cancel operation scenario*
+#### *Cancel operation scenario*
 * User clicks button **Add**;
 * Application displays form for adding;
 * User clicks button **Cancel**;
@@ -78,7 +78,7 @@ For dropping date and period lists user can click button **Drop**.
 
 ### 1.4 Edit employee
 
-####*Main scenario*
+#### *Main scenario*
 * User clicks button **Edit**;
 * Application displays form for editing;
 * User edits information and presses **Save**;
@@ -88,7 +88,7 @@ For dropping date and period lists user can click button **Drop**.
 ![edit_form](./edit_employee.png)
 **pic 1.5 - View the form for editing**
 
-####*Cancel operation scenario*
+#### *Cancel operation scenario*
 * User clicks button **Edit**;
 * Application displays form for editing;
 * User clicks button **Cancel**;
@@ -98,7 +98,7 @@ For dropping date and period lists user can click button **Drop**.
   
 ### 1.5 Delete employee
 
-####*Main scenario*
+#### *Main scenario*
 * User clicks button **Delete** in employee's line in lists;
 * An alert window will appear and ask if user want to delete;
 * User clicks "Yes", then information about employee
@@ -106,7 +106,7 @@ will be deleted;
 * If user clicks "No", then window just will be closed and
 information won't be deleted.
   
-####*Cancel operation scenario*
+#### *Cancel operation scenario*
 * User clicks button **Delete** in employee's line in lists;
 * An alert window will appear and ask if user want to delete;
 * User clicks "Yes", then information about employee
@@ -119,7 +119,7 @@ will be deleted;
 The mode is designed to view list of departments.
 This mode works just for edit list of departments **(pic 2.1)**.
 
-####*Main scenario*
+#### *Main scenario*
 * User select item Departments;
 * Application open departments list.
 
@@ -128,7 +128,7 @@ This mode works just for edit list of departments **(pic 2.1)**.
 
 ### 2.2 Add department
 
-####*Main scenario*
+#### *Main scenario*
 * User clicks button **Add**;
 * Application displays form for adding;
 * User enters information and presses **Save**;
@@ -138,7 +138,7 @@ This mode works just for edit list of departments **(pic 2.1)**.
 ![add_form](./add_department.png)
 **pic 2.2 - View the form for adding**
 
-####*Cancel operation scenario*
+#### *Cancel operation scenario*
 * User clicks button **Add**;
 * Application displays form for adding;
 * User clicks button **Cancel**;
@@ -148,7 +148,7 @@ This mode works just for edit list of departments **(pic 2.1)**.
 
 ### 2.3 Edit department
 
-####*Main scenario*
+#### *Main scenario*
 * User clicks button **Edit**;
 * Application displays form for editing;
 * User edits information and presses **Save**;
@@ -158,7 +158,7 @@ This mode works just for edit list of departments **(pic 2.1)**.
 ![edit_form](./edit_department.png)
 **pic 2.3 - View the form for editing**
 
-####*Cancel operation scenario*
+#### *Cancel operation scenario*
 * User clicks button **Edit**;
 * Application displays form for editing;
 * User clicks button **Cancel**;
@@ -168,7 +168,7 @@ This mode works just for edit list of departments **(pic 2.1)**.
   
 ### 2.4 Delete department
 
-####*Main scenario*
+#### *Main scenario*
 * User clicks button **Delete** in department's line in lists;
 * An alert window will appear and ask if user want to delete;
 * User clicks "Yes", then information about department
@@ -176,7 +176,7 @@ will be deleted;
 * If user clicks "No", then window just will be closed and
 information won't be deleted.
   
-####*Cancel operation scenario*
+#### *Cancel operation scenario*
 * User clicks button **Delete** in department's line in lists;
 * An alert window will appear and ask if user want to delete;
 * User clicks "Yes", then information about department
