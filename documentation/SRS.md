@@ -26,7 +26,7 @@ department appears **(pic 1.1)**.
 * User select item Employees;
 * Application open employees list.
 
-![list_employees](./list_empl.png)
+![list_employees](./list_employees.png)
 **pic 1.1 - View the employees list**
 
 The list displays the following columns:
