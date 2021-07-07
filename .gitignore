@@ -3,3 +3,4 @@ bin/
 lib64
 pyvenv.cfg
 .idea/
+./documentation/add_department.png ./documentation/add_employee.png ./documentation/delete_department.png ./documentation/delete_employee.png ./documentation/edit_department.png ./documentation/edit_employee.png ./documentation/list_departments.png ./documentation/list_employees.png ./documentation/search_date.png ./documentation/search_period.png
