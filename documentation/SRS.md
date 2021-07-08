@@ -63,10 +63,14 @@ For dropping date and period lists user can click button **Drop**.
 * Application displays form for adding;
 * User enters information and presses **Save**;
 * If all information is valid, then information is adding in DB;
-* If don't all information is valid, then error message is displaying.
+* If don't all information is valid, then error message is displaying
+  **(pic 1.5)**.
 
 ![add_form](./add_employee.png)
 **pic 1.4 - View the form for adding**
+
+![err_add_empl](./err_add_empl.png)
+**pic 1.5 - View the error message**
 
 #### *Cancel operation scenario*
 * User clicks button **Add**;
@@ -83,10 +87,14 @@ For dropping date and period lists user can click button **Drop**.
 * Application displays form for editing;
 * User edits information and presses **Save**;
 * If all information is valid, then information is adding in DB;
-* If don't all information is valid, then error message is displaying.
+* If don't all information is valid, then error message is displaying 
+  **(pic 1.7)**.
 
 ![edit_form](./edit_employee.png)
-**pic 1.5 - View the form for editing**
+**pic 1.6 - View the form for editing**
+
+![err_edit](./err_edit_empl.png)
+**pic 1.7 - View the error message for editing**
 
 #### *Cancel operation scenario*
 * User clicks button **Edit**;
@@ -102,17 +110,21 @@ For dropping date and period lists user can click button **Drop**.
 * User clicks button **Delete** in employee's line in lists;
 * An alert window will appear and ask if user want to delete;
 * User clicks "Yes", then information about employee
-will be deleted;
-* If user clicks "No", then window just will be closed and
-information won't be deleted.
+will be deleted.
+* If the program cannot delete the entry, then error message
+will appear **(pic 1.9)**.
   
 #### *Cancel operation scenario*
 * User clicks button **Delete** in employee's line in lists;
 * An alert window will appear and ask if user want to delete;
-* User clicks "Yes", then information about employee
-will be deleted;
+* User clicks "No", then information about employee
+won't be deleted.
+
 ![delete_form](./delete_employee.png)
-**pic 1.6 - View the form for deleting**
+**pic 1.8 - View the form for deleting**
+  
+![err_delete_empl](./err_del_empl.png)
+**pic 1.9 - View the form for deleting**
   
   
 ## 2. Departments
@@ -133,11 +145,14 @@ This mode works just for edit list of departments **(pic 2.1)**.
 * Application displays form for adding;
 * User enters information and presses **Save**;
 * If all information is valid, then information is adding in DB;
-* If don't all information is valid, then error message is displaying.
+* If don't all information is valid, then error message is displaying
+  **(pic 2.3)**.
 
 ![add_form](./add_department.png)
 **pic 2.2 - View the form for adding**
 
+![err_add_dep](./err_add_departm.png)
+**pic 2.3 - View the error message for adding**
 #### *Cancel operation scenario*
 * User clicks button **Add**;
 * Application displays form for adding;
@@ -153,11 +168,14 @@ This mode works just for edit list of departments **(pic 2.1)**.
 * Application displays form for editing;
 * User edits information and presses **Save**;
 * If all information is valid, then information is adding in DB;
-* If don't all information is valid, then error message is displaying.
+* If don't all information is valid, then error message is displaying
+  **(pic 2.5)**.
 
 ![edit_form](./edit_department.png)
-**pic 2.3 - View the form for editing**
+**pic 2.4 - View the form for editing**
 
+![err_edit_dep](./err_edit_departm.png)
+**pic 2.5 - View the error message for editing**
 #### *Cancel operation scenario*
 * User clicks button **Edit**;
 * Application displays form for editing;
@@ -173,13 +191,17 @@ This mode works just for edit list of departments **(pic 2.1)**.
 * An alert window will appear and ask if user want to delete;
 * User clicks "Yes", then information about department
 will be deleted;
-* If user clicks "No", then window just will be closed and
-information won't be deleted.
+* If the program cannot delete the entry, then error message
+will appear **(pic 2.7)**.
   
 #### *Cancel operation scenario*
 * User clicks button **Delete** in department's line in lists;
 * An alert window will appear and ask if user want to delete;
-* User clicks "Yes", then information about department
-will be deleted;
+* User clicks "No", then window just will be closed and
+information won't be deleted.
+
 ![delete_form](./delete_department.png)
-**pic 2.4 - View the form for deleting**
+**pic 2.6 - View the form for deleting**
+  
+![del_err](./err_del_dep.png)
+**pic 2.7 - View the error message for deleting**
