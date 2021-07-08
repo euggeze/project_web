@@ -135,7 +135,7 @@ This mode works just for edit list of departments **(pic 2.1)**.
 * User select item Departments;
 * Application open departments list.
 
-![list_departments](./list_departments.png)
+![list_departments](./list_departm.png)
 **pic 2.1 - View the departments list**
 
 ### 2.2 Add department
