@@ -1,0 +1,107 @@
+html, body {font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif; 
+  font-size: 18px;
+  font-weight: bold}
+
+select {font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif; 
+  font-size: 18px;
+  font-weight: bold}
+
+.zebra_table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 18px;
+  width: 80%;
+  border: 3px solid #000000;
+  text-align: left;
+  border-collapse: collapse;
+  margin: auto;
+}
+th {
+  background: #b0afab;
+  font-weight: normal;
+  border: 3px solid #000000;
+  padding: 10px 15px;
+}
+td {
+  border: 3px solid #000000;
+  border-top: 1px solid #e8edff;
+  padding: 10px 15px;
+}
+tr:hover td {
+  background: #8df06c;
+}
+tr:nth-child(2n+1) {
+  background: #ffeb85;
+}
+
+.green_div { 
+  background: #7cde64; 
+  border: 2px solid #000000; 
+ }
+ .yellow_div { 
+  background: #ffeb85; 
+  border: 2px solid #000000; 
+ }
+
+ .button{
+  font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif; 
+  font-size: 18px;
+  border: 2px solid #000000;
+  padding: 15px 32px;
+  height: 25px;
+    width:50px;
+  cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+  border-radius: 4px;
+ }
+ .button:active {
+  background-color: #3d3922;
+  color: white;
+}
+ .green_button{
+  background-color: #3aad1d; 
+  color: white;
+ }
+ .yellow_button{
+  background-color: #ffee00; 
+    color: rgb(0, 0, 0);
+ }
+ .red_button{
+  background-color: #c23016; 
+    color: white;
+ }
+
+ .tab {
+  overflow: hidden;
+  display: flex;
+  background-color: #b0afab;
+}
+
+.tab a {
+  text-decoration: none;
+  color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 50%;
+  border: 1px;
+  padding: 15px 32px;
+  font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif; 
+  font-size: 18px;
+  font-weight: bold
+}
+
+.tab a:hover {
+  background-color: #ddd;
+}
+.tab .a_activate {
+  background-color: rgb(238, 238, 238);
+  font-family:"Lucida Sans Unicode", "Lucida Grande", Sans-Serif; 
+  font-size: 18px;
+  font-weight: bold
+}
+

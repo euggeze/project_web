@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Manager for department and employees</title>
+  <link rel="stylesheet" href="source.css">
+  <script type="text/javascript" src="scripts.js"></script>
+ </head>
+ <body>
+
+       <div class="tab">
+          <a class="tab a_activate">Employees</a>
+          <a class="tab a" href="departments.html">Departments</a>
+       </div>
+
+       <div class="green_div">
+          <div style="width: 82%; float: left;padding-top:1%">
+          <p style="text-indent:100px">Select department   
+             <select>
+                <option>--Select--</option>
+                <option>Managment</option>
+                <option>Development</option>
+                <option>Testing</option>
+              </select>
+             </div>
+             <div style="width: 25%;
+             margin-left: 75%;
+             padding-top:1%">
+             <a class = "button green_button" href = "add_empl.html">Add</a>
+            </div>
+          </p>
+       </div>
+
+        <div class="yellow_div">
+            <div style="width: 70%; float: left;padding-top:1%">
+                <p style="text-indent:100px">Date from  
+                <input type="date" id="date_from" name="date_from"/>    
+                By  
+                <input type="date" id="date_by" name="date_by"/>  </div>
+                <div style="width: 30%;
+                margin-left: 70%;
+                padding-top:1%">
+                <input type="checkbox" name="a" checked> Period       
+                   <a class = "button yellow_button" >Search</a>    
+                   <a class = "button red_button" >Drop</a></div>
+          </p>
+        </div>
+        <br><br>
+
+     <table class="zebra_table">
+         <tr>
+             <th>ID</th>
+             <th>Name</th>
+             <th>Date of birthday</th>
+             <th>Salary</th>
+             <th width="75"></th>
+         </tr>
+         <tr>
+             <td>3</td>
+             <td>Peter Panow</td>
+             <td>07/04/1996</td>
+             <td>1300.00</td>
+             <td><a onclick="delete_func()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                 <a href="edit_empl.html"><img src="pencil.png" width="32" height="32" ></a></td>
+         </tr>
+         <tr>
+             <td>4</td>
+             <td>Henri Holland</td>
+             <td>02/05/2000</td>
+             <td>900.00</td>
+             <td><a onclick="delete_func()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                 <a href="edit_empl.html"><img src="pencil.png" width="32" height="32" ></a></td>
+         </tr>
+         <tr>
+             <td>8</td>
+             <td>Olga Erganova</td>
+             <td>02/22/1994</td>
+             <td>1150.00</td>
+             <td><a onclick="delete_func()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                 <a href="edit_empl.html"><img src="pencil.png" width="32" height="32" ></a></td>
+         </tr>
+         <tr>
+             <td>11</td>
+             <td>Franc Kabo</td>
+             <td>03/13/1991</td>
+             <td>1530.10</td>
+             <td><a onclick="delete_func()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                 <a href="edit_empl.html"><img src="pencil.png" width="32" height="32" ></a></td>
+         </tr>
+         <tr>
+             <td> </td>
+             <td></td>
+             <td></td>
+             <td></td>
+             <td></td>
+         </tr>
+         <tr>
+             <td> </td>
+             <td></td>
+             <td>Average salary</td>
+             <td>1245.00</td>
+             <td></td>
+         </tr>
+     </table>
+    </body>
+</html>
