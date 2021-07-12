@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Manager for department and employees</title>
+  <link rel="stylesheet" href="source.css">
+ </head>
+ <body>
+
+   <div class="tab">
+      <a class="tab a_activate" href="main.html">Employees</a>
+      <a class="tab a" href = "departments.html">Departments</a>
+    </div>
+
+   <div class="green_div" >
+    <p align="center" style="font-size:30px"> Add</p>
+   </div>
+     <br><br>
+     <div style="width: 50%; float: left;padding-top:1%">
+        <p align =right style="margin-right:40px">Select department:</p>      
+        <p align =right style="margin-right:40px">Name:</p>    
+        <p align =right style="margin-right:40px">Date of birthday:</p>    
+        <p align =right style="margin-right:40px">Salary:</p>   
+                   
+           </div>
+     <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">
+            <p >
+            <select style = "font-size: 15px;">
+                <option>Development</option>
+                <option>Managment</option>
+                <option>Development</option>
+                <option>Testing</option>
+              </select>
+            </p> 
+            <p >  <input type="text" size="15" style = "font-size: 16;" value="Ivan Ivanov"> </p>
+            <p >  <input type="date" id="date_by" name="date_by" value="2001-03-14"/> </p>
+            <p >  <input type="text" size="15" style = "font-size: 16;" value="995.55"> </p>
+          </div>
+         <div style="width: 50%; float: left;padding-top:1%"> 
+         <p align =right style="margin-right: 40px;" > <a class = "button red_button" href="main.html">Cancel</a>  </p> 
+         </div>
+       <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">        
+            <p align =left style="margin-left:40px" > <a class = "button green_button" href="added_empl.html">Save</a>  </p>
+       </div>
+ </body>
+</html>
