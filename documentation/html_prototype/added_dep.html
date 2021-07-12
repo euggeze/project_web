@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <meta charset="utf-8">
+  <title>Manager for department and employees</title>
+  <link rel="stylesheet" href="source.css">
+  <script type="text/javascript" src="scripts.js"></script>
+ </head>
+ <body>
+
+   <div class="tab">
+      <a class="tab a" href="main.html">Employees</a>
+      <a class="tab a_activate" >Departments</a>
+   </div>
+
+   <div class="green_div">
+      <div style="width: 70%; float: left;padding-top:1%">
+      <p>
+        </div>
+         <div style="width: 24%;
+         margin-left: 82%;
+         padding-top:1%">
+         <a class = "button green_button" href="add_department.html">Add</a>
+        </div>
+      </p>
+   </div>
+     <br><br>
+
+    <table class="zebra_table">
+            <tr>
+               <th>ID</th>
+               <th>Department name</th>
+               <th>Average salary</th>
+               <th width="75"></th>
+            </tr>
+            <tr>
+               <td>1</td>
+               <td>Managment</td>
+               <td>1455.43</td>
+               <td><a onclick="delete_func_dep()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                  <a href="edit_department.html"><img src="pencil.png" width="32" height="32" ></a></td>
+            </tr>
+            <tr>
+               <td>2</td>
+               <td>Development</td>
+               <td>1350.22</td>
+               <td><a style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                  <a href="edit_department.html"><img src="pencil.png" width="32" height="32" ></a></td>
+            </tr>
+            <tr>
+               <td>3</td>
+               <td>Testing</td>
+               <td>1115.00</td>
+               <td><a  style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                  <a href="edit_department.html"><img src="pencil.png" width="32" height="32" ></a></td>
+            </tr>
+            <tr>
+               <td>4</td>
+               <td>Bookkeeping</td>
+               <td>1010.00</td>
+               <td><a style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                  <a href="edit_department.html"><img src="pencil.png" width="32" height="32" ></a></td>
+            </tr>
+            <tr>
+               <td>5</td>
+               <td>Technical stuff</td>
+               <td>0.00</td>
+               <td><a  style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+                  <a href="edit_department.html"><img src="pencil.png" width="32" height="32" ></a></td>
+            </tr>
+    </table>
+
+ </body>
+</html>

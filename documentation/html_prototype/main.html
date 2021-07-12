@@ -9,16 +9,16 @@
  <body>
 
        <div class="tab">
-          <a class="tab a_activate">Employees</a>
+          <a class="tab a_activate" href="main.html">Employees</a>
           <a class="tab a" href="departments.html">Departments</a>
        </div>
 
        <div class="green_div">
           <div style="width: 82%; float: left;padding-top:1%">
           <p style="text-indent:100px">Select department   
-             <select>
+             <select onchange="if (this.value=='selected_dep.html') window.location.href = this.value">
                 <option>--Select--</option>
-                <option>Managment</option>
+                <option value="selected_dep.html">Managment</option>
                 <option>Development</option>
                 <option>Testing</option>
               </select>
@@ -34,14 +34,14 @@
         <div class="yellow_div">
             <div style="width: 70%; float: left;padding-top:1%">
                 <p style="text-indent:100px">Date from  
-                <input type="date" id="date_from" name="date_from"/>    
+                <input type="date" id="date_from" name="date_from" value="1991-03-13"/>    
                 By  
-                <input type="date" id="date_by" name="date_by"/>  </div>
+                <input type="date" id="date_by" name="date_by" value="1995-11-13"/>  </div>
                 <div style="width: 30%;
                 margin-left: 70%;
                 padding-top:1%">
-                <input type="checkbox" name="a" checked> Period       
-                   <a class = "button yellow_button" >Search</a>    
+                <input type="checkbox" name="check_period" checked onchange="window.location.href='search_date.html'"> Period       
+                   <a class = "button yellow_button" href="search_period.html">Search</a>    
                    <a class = "button red_button" >Drop</a></div>
           </p>
         </div>
@@ -68,7 +68,7 @@
              <td>Henri Holland</td>
              <td>02/05/2000</td>
              <td>900.00</td>
-             <td><a onclick="delete_func()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+             <td><a  style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
                  <a href="edit_empl.html"><img src="pencil.png" width="32" height="32" ></a></td>
          </tr>
          <tr>
@@ -76,7 +76,7 @@
              <td>Olga Erganova</td>
              <td>02/22/1994</td>
              <td>1150.00</td>
-             <td><a onclick="delete_func()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+             <td><a style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
                  <a href="edit_empl.html"><img src="pencil.png" width="32" height="32" ></a></td>
          </tr>
          <tr>
@@ -84,7 +84,7 @@
              <td>Franc Kabo</td>
              <td>03/13/1991</td>
              <td>1530.10</td>
-             <td><a onclick="delete_func()" style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
+             <td><a style = "cursor: pointer;"><img src="trash.png" width="32" height="32"></a>
                  <a href="edit_empl.html"><img src="pencil.png" width="32" height="32" ></a></td>
          </tr>
          <tr>
