@@ -3,3 +3,6 @@ bin/
 lib64
 pyvenv.cfg
 .idea/
+Department_application.egg-info/
+dist/
+**/__pycache__
