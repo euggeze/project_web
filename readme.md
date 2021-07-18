@@ -9,4 +9,3 @@ The web application can:
 1. display a list of departments and the average salary (calculated automatically) for these departments 
 2. display a list of employees in the departments with an indication of the salary for each employee and a search field to search for employees born on a certain date or in the period between dates
 3. change (add/edit/delete) the above data
-
