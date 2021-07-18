@@ -6,5 +6,5 @@ pyvenv.cfg
 Department_application.egg-info/
 dist/
 **/__pycache__
-.coveralls.yaml
+.coveralls.yml
 .coverage
