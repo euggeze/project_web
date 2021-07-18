@@ -32,5 +32,3 @@ jobs:
           coveralls --service=github
         env:
           GITHUB_TOKEN: ${{secrets.GITHAB_TOKEN}}
-      	
-      
