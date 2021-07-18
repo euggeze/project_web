@@ -25,7 +25,8 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: pylint check
         run: |
-          pylint --load-plugins=pylint_django --django-settings-module=department_project/department_project/settings.py 
+          pylint setup.py
+          pylint --load-plugins=pylint_django --django-settings-module=department_project.settings department_project/*
       - name: Coveralls	
         run: |
           coveralls --service=github
