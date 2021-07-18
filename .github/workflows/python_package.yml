@@ -22,6 +22,10 @@ jobs:
           pip install pylint
           pip install pylint-django
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: pylint check
+        run: |
+          pylint setup.py
+          pylint --load-plugins=pylint_django --django-settings-module=department_project.settings department_project/*
       - name: Install Coveralls       
         run:
           pip install coveralls
