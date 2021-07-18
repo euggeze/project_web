@@ -28,8 +28,8 @@ jobs:
           pylint setup.py
           pylint --load-plugins=pylint_django --django-settings-module=department_project/settings.py department_project/* 
       - name: Coveralls
-      	run: |
-      	   coveralls --service=github
+        run: |
+          coveralls --service=github
       	env:
       	   GITHUB_TOKEN: ${{secrets.GITHAB_TOKEN}}
       
