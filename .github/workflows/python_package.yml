@@ -28,7 +28,6 @@ jobs:
           pylint --load-plugins=pylint_django --django-settings-module=department_project.settings department_project/*
       - name: Coveralls	
         run: |
-          pip install coveralls
-          coveralls --service=github
+          coverallsapp/github-action@1.1.3
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
