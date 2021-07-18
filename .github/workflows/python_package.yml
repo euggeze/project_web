@@ -26,8 +26,8 @@ jobs:
       - name: pylint check
         run: |
           pylint --load-plugins=pylint_django --django-settings-module=department_project.settings department_project/*
-      - name: Coveralls	
+      - name: Coveralls
+      	env:
+          GITHUB_TOKEN: ${{secrets.GITHAB_TOKEN}}	
         run: |
           coveralls --service=github
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHAB_TOKEN}}
