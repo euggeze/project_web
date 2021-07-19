@@ -5,3 +5,5 @@ omit =
 	*/tests*
 	*wsgi.py
     	*asgi.py
+	*admin.py
+	*apps.py
