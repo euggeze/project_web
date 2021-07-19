@@ -1,5 +1,5 @@
 [![Project build Actions Status](https://github.com/euggeze/project_web/workflows/python_package/badge.svg)](https://github.com/euggeze/project_web/actions)
-[![Coverage Status](https://coveralls.io/repos/github/euggeze/project_web/badge.png?branch=developer)](https://coveralls.io/github/euggeze/project_web?branch=developer)
+[![Coverage Status](https://coveralls.io/repos/github/euggeze/project_web/badge.svg?branch=developer&killcache=1)](https://coveralls.io/github/euggeze/project_web?branch=developer)
 
 #About the project
 *For read SRS-file [click](./documentation/SRS.md)*
