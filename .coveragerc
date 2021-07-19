@@ -3,3 +3,5 @@ omit =
 	setup.py
 	department_project/manage.py
 	*/tests*
+	*wsgi.py
+    	*asgi.py
