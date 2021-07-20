@@ -1,5 +1,3 @@
-[![Coverage Status](https://coveralls.io/repos/github/euggeze/project_web/badge.svg?branch=master)](https://coveralls.io/github/euggeze/project_web?branch=master)
-
 #About the project
 *For read SRS-file [click](./documentation/SRS.md)*
 
