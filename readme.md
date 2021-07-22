@@ -1,7 +1,7 @@
 [![Project build Actions Status](https://github.com/euggeze/project_web/workflows/python_package/badge.svg)](https://github.com/euggeze/project_web/actions)
 [![Coverage Status](https://coveralls.io/repos/github/euggeze/project_web/badge.svg?branch=developer&killcache=1)](https://coveralls.io/github/euggeze/project_web?branch=developer)
 
-#About the project
+# About the project
 *For read SRS-file [click](./documentation/SRS.md)*
 
 This application is a web application that allows you to work with the data of employees and departments by connecting to a database. The web application can be deployed to **Gunicorn** using the command line. All information about the work will be displayed in the console and saved in the log file.
