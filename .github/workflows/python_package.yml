@@ -40,9 +40,8 @@ jobs:
       - name: version
         run: cat ./version
         id: version   
-      
-      - uses: actions/create-release@v1  
       - name: Added release
+      - uses: actions/create-release@v2
         with:
           draft: false
           prerelease: false
