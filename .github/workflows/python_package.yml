@@ -1,6 +1,9 @@
 name: python_package
 
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
+    types: [opened, closed]
 
 jobs:
   build:
@@ -44,13 +47,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Checking your input
         run: |
-          echo "github.event.pull_request.merged           : $MERGED_RAW"
-          echo "github.event.pull_request.merged == 'true' : $MERGED_TRUE_STR"
-          echo "github.event.pull_request.merged  == true  : $MERGED_TRUE_BOOL"
+          echo "github.event.pull_request           : $MERGED_RAW"
+          echo "github.event.pull_request.merged == true : $MERGED_TRUE_STR"
+          echo "github.event.pull_request.closed  == true  : $MERGED_TRUE_BOOL"
         env:
-          MERGED_RAW: ${{ github.event.pull_request.merged }}
-          MERGED_TRUE_STR: ${{ github.event.pull_request.merged == 'true' }}
-          MERGED_TRUE_BOOL: ${{ github.event.pull_request.merged == true }}
+          MERGED_RAW: ${{ github.event.pull_request == true }}
+          MERGED_TRUE_STR: ${{ github.event.pull_request.merged == true }}
+          MERGED_TRUE_BOOL: ${{ github.event.pull_request.closed == true }}
       - name: Add release
         if: github.event.pull_request.merged == true
         uses: actions/create-release@v1
