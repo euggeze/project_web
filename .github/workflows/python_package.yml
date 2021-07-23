@@ -48,7 +48,7 @@ jobs:
           echo "github.event.pull_request.merged == true : $MERGED_TRUE_STR"
           echo "github.event.pull_request.closed  == true  : $MERGED_TRUE_BOOL"
         env:
-          MERGED_RAW: ${{ github.event.pull_request }}
+          MERGED_RAW: ${{ github.event.pull_request == true }}
           MERGED_TRUE_STR: ${{ github.event.pull_request.merged == true }}
           MERGED_TRUE_BOOL: ${{ github.event.pull_request.closed == true }}
       - name: Add release
