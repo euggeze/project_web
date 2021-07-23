@@ -43,7 +43,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Add release
-        if: steps.checkTag.outputs.exists == 'false
+        if: steps.checkTag.outputs.exists == 'false'
         uses: actions/create-release@v1
         with:
           draft: false
