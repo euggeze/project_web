@@ -39,17 +39,17 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.0.0
         id: checkTag
         with: 
-          tag: v0.4
+          tag: v0.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Add release
-        if: github.event.pull_request.merged == 'true' || steps.checkTag.outputs.exists == 'false'
+        if: github.event.pull_request.merged == 'true' && steps.checkTag.outputs.exists == 'false'
         uses: actions/create-release@v1
         with:
           draft: false
           prerelease: false
-          tag_name: v0.4
-          release_name: Release v0.4
+          tag_name: v0.5
+          release_name: Release v0.5
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
