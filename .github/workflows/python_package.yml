@@ -42,26 +42,17 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.0.0
         id: checkTag
         with: 
-          tag: v0.5
+          tag: v0.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Checking your input
-        run: |
-          echo "github.event.pull_request           : $MERGED_RAW"
-          echo "github.event.pull_request.merged == true : $MERGED_TRUE_STR"
-          echo "github.event.pull_request.closed  == true  : $MERGED_TRUE_BOOL"
-        env:
-          MERGED_RAW: ${{ github.event.pull_request == true }}
-          MERGED_TRUE_STR: ${{ github.event.pull_request.merged == true }}
-          MERGED_TRUE_BOOL: ${{ github.event.pull_request.closed == true }}
       - name: Add release
-        if: github.event.pull_request.merged == true
+        if: github.event.pull_request.merged == true && steps.checkTag.outputs.exists == 'false'
         uses: actions/create-release@v1
         with:
           draft: false
           prerelease: false
-          tag_name: v0.5
-          release_name: Release v0.5
+          tag_name: v0.6
+          release_name: Release v0.6
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
