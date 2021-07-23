@@ -36,10 +36,14 @@ jobs:
         run: coveralls --service=github
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: version
-        run: cat ./version
-        id: version
+      - uses: mukunku/tag-exists-action@v1.0.0
+        id: checkTag
+        with: 
+          tag: v0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Add release
+        if: steps.checkTag.outputs.exists == 'false
         uses: actions/create-release@v1
         with:
           draft: false
