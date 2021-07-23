@@ -39,7 +39,7 @@ jobs:
       - uses: mukunku/tag-exists-action@v1.0.0
         id: checkTag
         with: 
-          tag: v0.3
+          tag: v0.5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Add release
@@ -48,8 +48,8 @@ jobs:
         with:
           draft: false
           prerelease: false
-          tag_name: v0.3
-          release_name: Release v0.3
+          tag_name: v0.5
+          release_name: Release v0.5
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
