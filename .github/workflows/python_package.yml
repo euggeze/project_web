@@ -50,7 +50,7 @@ jobs:
           draft: false
           prerelease: false
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ steps.version.outputs.version }}
+          release_name: Release v0.1
           body: |
             ${{ steps.Changelog.outputs.changelog }}
         env:
