@@ -1,0 +1,55 @@
+name: python_package
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pylint
+          pip install pylint-django
+          pip install -r requirements.txt
+      - name: pylint check
+        run: |
+          pylint setup.py
+          pylint --load-plugins=pylint_django --django-settings-module=department_project.settings department_project/*
+      - name: Install Coveralls       
+        run:
+          pip install coveralls
+      - name: Testint coverage       
+        run:
+          coverage run --source=department_project department_project/manage.py test department_app 
+      - name: Coveralls
+        run: coveralls --service=github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: mukunku/tag-exists-action@v1.0.0
+        id: checkTag
+        with: 
+          tag: v0.3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Add release
+        if: github.event.pull_request.merged == 'true' && steps.checkTag.outputs.exists == 'false'
+        uses: actions/create-release@v1
+        with:
+          draft: false
+          prerelease: false
+          tag_name: v0.3
+          release_name: Release v0.3
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+

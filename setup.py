@@ -1,3 +1,6 @@
+"""
+Module for installing application.
+"""
 import setuptools
 
 def read_requiremets():
@@ -8,7 +11,7 @@ def read_requiremets():
         Massive project requirements
     """
     with open('requirements.txt') as file_req:
-        return [line for line in file_req.readlines()]
+        return file_req.readlines()
 
 
 setuptools.setup(
