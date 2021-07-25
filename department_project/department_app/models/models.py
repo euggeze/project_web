@@ -1,5 +1,7 @@
+"""This module for django migration"""
 from django.db import models
 
+"Class for object structure Employee"
 class Employee(models.Model):
     id_employee = models.AutoField(primary_key=True, editable=False)
     name = models.CharField(max_length=60,null=False)
@@ -7,6 +9,7 @@ class Employee(models.Model):
     salary = models.DecimalField(max_digits=9, decimal_places=2,null=False)
     id_department = models.ForeignKey ('Department', on_delete = models.CASCADE, null=False)
 
+"Class for object structure Department"
 class Department(models.Model):
     id_department = models.AutoField(primary_key=True, editable=False)
     name_department = models.CharField(max_length=60,null=False)
