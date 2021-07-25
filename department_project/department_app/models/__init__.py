@@ -1,3 +1,3 @@
-"""Module for combining models""" 
+"""Module for combining models"""
 from department_app.models.models import Employee
 from department_app.models.models import Department
