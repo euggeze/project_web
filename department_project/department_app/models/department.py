@@ -8,6 +8,6 @@ class Department(models.Model):
     name = models.CharField(max_length=60, null=False, blank=False)
 
     class Meta:
-        db_table = 'department_app_department'
+        db_table = 'departments'
         verbose_name = 'Department names'
         ordering = ['name']

@@ -11,6 +11,6 @@ class Employee(models.Model):
     department = models.ForeignKey('Department', on_delete=models.CASCADE, null=False, blank=False)
 
     class Meta:
-        db_table = 'department_app_employee'
+        db_table = 'employees'
         verbose_name = 'Employee information'
         ordering = ['name']
