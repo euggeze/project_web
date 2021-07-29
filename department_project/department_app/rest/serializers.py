@@ -13,14 +13,13 @@ class EmployeeSerialize(serializers.ModelSerializer):
         fields = '__all__'
 
 
-def get_average_salary():
-    """Function for count average salary"""
-    return 1000
-
-
 class DepartmentSerialize(serializers.ModelSerializer):
     """ Class for serialization Department"""
     average_salary = SerializerMethodField('get_average_salary')
+
+    def get_average_salary(self):
+        """Function for count average salary"""
+        return 1000
 
     class Meta:
         model = Department
