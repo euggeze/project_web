@@ -5,7 +5,7 @@ from department_app.models import Department
 from department_app.rest import DepartmentSerialize
 
 
-class DepartmentViewSet(ModelViewSet):
+class DepartmentViewSet(ModelViewSet): # pylint: disable=too-many-ancestors
     """Class for selecting queryset and
         serializer_class"""
     serializer_class = DepartmentSerialize

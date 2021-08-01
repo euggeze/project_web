@@ -10,7 +10,7 @@ class DepartmentSerialize(serializers.ModelSerializer):
     average_salary = SerializerMethodField('get_average_salary')
 
     @staticmethod
-    def get_average_salary(check):
+    def get_average_salary(plug): # pylint: disable=unused-argument
         """Function for count average salary"""
         return 1000
 
