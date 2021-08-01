@@ -10,7 +10,7 @@ class DepartmentSerialize(serializers.ModelSerializer):
     average_salary = SerializerMethodField('get_average_salary')
 
     @staticmethod
-    def get_average_salary(self):
+    def get_average_salary(check):
         """Function for count average salary"""
         return 1000
 
