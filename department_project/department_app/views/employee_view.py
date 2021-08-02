@@ -5,7 +5,7 @@ from department_app.models import Employee
 from department_app.rest import EmployeeSerialize
 
 
-class EmployeeViewSet(ModelViewSet): # pylint: disable=too-many-ancestors
+class EmployeeViewSet(ModelViewSet):
     """Class for selecting queryset and
     serializer_class"""
     serializer_class = EmployeeSerialize
