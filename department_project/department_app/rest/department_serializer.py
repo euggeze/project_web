@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from rest_framework.fields import SerializerMethodField
 
-from department_app.models import Department
+from department_app.models import Department, Employee
 
 
 class DepartmentSerialize(serializers.ModelSerializer):
@@ -10,9 +10,19 @@ class DepartmentSerialize(serializers.ModelSerializer):
     average_salary = SerializerMethodField('get_average_salary')
 
     @staticmethod
-    def get_average_salary(plug):
-        """Function for count average salary"""
-        return 1000
+    def get_average_salary(obj):
+        """Method for counting the average salary of a department
+            Keyword argument:
+            obj - current object Department
+
+            Return:
+            Average salary of the department
+        """
+        employee_data = Employee.objects.filter(department=obj)
+        try:
+            return sum([x.salary for x in employee_data])/len(employee_data)
+        except ZeroDivisionError:
+            return 0
 
     class Meta:
         model = Department
