@@ -1,6 +1,4 @@
 """Module for working with Department model"""
-from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 
 from department_app.models import Department
@@ -12,4 +10,3 @@ class DepartmentViewSet(ModelViewSet):
         serializer_class"""
     serializer_class = DepartmentSerialize
     queryset = Department.objects.all()
-
