@@ -20,7 +20,7 @@ class DepartmentSerialize(serializers.ModelSerializer):
         """
         employee_data = Employee.objects.filter(department=obj)
         try:
-            return sum([x.salary for x in employee_data])/len(employee_data)
+            return round(sum([x.salary for x in employee_data])/len(employee_data), 2)
         except ZeroDivisionError:
             return 0
 

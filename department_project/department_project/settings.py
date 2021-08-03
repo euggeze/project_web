@@ -102,6 +102,9 @@ DATABASES = {
         'PASSWORD': 'B8i1lqn7C9aa!',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'TEST': {
+            'NAME': 'test_department_app_db'
+        }
     }
 }
 

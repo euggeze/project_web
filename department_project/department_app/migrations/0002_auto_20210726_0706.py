@@ -6,32 +6,32 @@ from django.db import migrations
 def data_for_db(apps, schema_editor):
     Department = apps.get_model('department_app', 'Department')
     Department.objects.bulk_create([
-        Department(id=1, name='Management'),
-        Department(id=2, name='Developing'),
-        Department(id=3, name='Testing'),
-        Department(id=4, name='Bookkeeping')
+        Department(name_department='Management'),
+        Department(name_department='Developing'),
+        Department(name_department='Testing'),
+        Department(name_department='Bookkeeping')
     ])
     Employee = apps.get_model('department_app', 'Employee')
     Employee.objects.bulk_create([
         Employee(name='Peter Panov', date_of_birthday='1994-07-04', salary=1300.00,
-                 department=Department.objects.get(id=1)),
+                 id_department=Department.objects.get(name_department='Management')),
         Employee(name='Henri Holland', date_of_birthday='2000-02-05', salary=900.09,
-                 department=Department.objects.get(id=1)),
+                 id_department=Department.objects.get(name_department='Management')),
         Employee(name='Olga Erganova', date_of_birthday='1994-05-01', salary=1150.18,
-                 department=Department.objects.get(id=2)),
+                 id_department=Department.objects.get(name_department='Developing')),
         Employee(name='Frank Cabo', date_of_birthday='1998-03-12', salary=941.00,
-                 department=Department.objects.get(id=3)),
+                 id_department=Department.objects.get(name_department='Testing')),
         Employee(name='Ivan Ivanov', date_of_birthday='1996-01-12', salary=922.00,
-                 department=Department.objects.get(id=4)),
+                 id_department=Department.objects.get(name_department='Bookkeeping')),
     ])
 
 
 def delete_data(apps, schema_editor):
     Department = apps.get_model('department_app', 'Department')
-    Department.objects.filter(id=1, name='Management').delete()
-    Department.objects.filter(id=2, name='Developing').delete()
-    Department.objects.filter(id=3, name='Testing').delete()
-    Department.objects.filter(id=4, name='Bookkeeping').delete()
+    Department.objects.filter(name_department='Management').delete()
+    Department.objects.filter(name_department='Developing').delete()
+    Department.objects.filter(name_department='Testing').delete()
+    Department.objects.filter(name_department='Bookkeeping').delete()
 
 
 class Migration(migrations.Migration):
