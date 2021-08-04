@@ -3,11 +3,11 @@ from django.test import TestCase, RequestFactory
 
 from department_app.models import Department
 from department_app.views import DepartmentViewSet
-import json
 
 
 class DepartmentTestCase(TestCase):
-
+    """Class for testing CRUD functions
+    and unexpected situations for department view"""
     def setUp(self):
         """Added test client"""
         self.factory = RequestFactory()
@@ -29,22 +29,22 @@ class DepartmentTestCase(TestCase):
         self.assertTrue(Department.objects.filter(name='TEST').exists())
 
     def test_update(self):
-        """Testing update the department"""
-        request_put = self.factory.put('/api/v1/department/', {'name': 'TEST'},
+        """Testing update a department"""
+        request = self.factory.put('/api/v1/department/', {'name': 'TEST'},
                                        content_type='application/json')
-        response_put = DepartmentViewSet.as_view({'put': 'update'})(request_put, pk=1)
-        self.assertEqual(200, response_put.status_code)
+        response = DepartmentViewSet.as_view({'put': 'update'})(request, pk=1)
+        self.assertEqual(200, response.status_code)
         self.assertTrue(Department.objects.filter(id=1, name='TEST').exists())
 
     def test_delete(self):
-        """Testing delete the department"""
+        """Testing delete a department"""
         request = self.factory.delete('/api/v1/department/')
         response = DepartmentViewSet.as_view({'delete': 'destroy'})(request, pk=1)
         self.assertEqual(204, response.status_code)
         self.assertFalse(Department.objects.filter(id=1).exists())
 
     def test_create_empty(self):
-        """Testing create empty department"""
+        """Testing create a empty department"""
         requests = self.factory.post('/api/v1/department/', {'name': ''}, format='json')
         past_count = Department.objects.count()
         response = DepartmentViewSet.as_view({'post': 'create'})(requests)
