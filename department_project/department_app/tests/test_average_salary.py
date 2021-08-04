@@ -1,7 +1,7 @@
 """Module for testing rest-modules"""
 from django.test import TestCase, RequestFactory
 
-from department_app.models import Employee, Department
+from department_app.models import Department
 from department_app.views import EmployeeViewSet, DepartmentViewSet
 from department_app.rest import DepartmentSerialize
 
