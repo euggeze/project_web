@@ -56,7 +56,7 @@ class EmployeeTestCase(TestCase):
                                                                  'date_of_birthday': '1999-09-09',
                                                                  'salary': 1250.50,
                                                                  'department': 1}, format='json')
-        response_create = EmployeeViewSet.as_view({'post': 'create'})(request_create)
+        EmployeeViewSet.as_view({'post': 'create'})(request_create)
         request = self.factory.delete('/api/v1/department/')
         response = DepartmentViewSet.as_view({'delete': 'destroy'})(request, pk=1)
         self.assertEqual(204, response.status_code)
