@@ -12,13 +12,25 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8, 3.9]
-
+    services:
+      postgres:
+        image: postgres:10.8
+        env:
+          POSTGRES_USER: user_web
+          POSTGRES_PASSWORD: B8i1lqn7C9aa!
+          POSTGRES_DB: department_app_db
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+      - name: psycopg2 prerequisites
+        run: sudo apt-get install libpq-dev
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -32,6 +44,8 @@ jobs:
       - name: Install Coveralls       
         run:
           pip install coveralls
+      - name: Run migrations
+        run: python department_project/manage.py migrate
       - name: Testint coverage       
         run:
           coverage run --source=department_project department_project/manage.py test department_app 
