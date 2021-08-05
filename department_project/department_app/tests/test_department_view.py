@@ -1,11 +1,9 @@
 """Module for testing rest-modules"""
 import json
 
-from rest_framework.test import APITestCase, APIRequestFactory, APIClient
+from rest_framework.test import APITestCase, APIRequestFactory
 
 from department_app.models import Department
-from department_app.rest import DepartmentSerialize
-from department_app.views import DepartmentViewSet
 
 
 class DepartmentTestCase(APITestCase):
@@ -15,17 +13,24 @@ class DepartmentTestCase(APITestCase):
     def setUp(self):
         """Added test client"""
         self.factory = APIRequestFactory()
-        self.client = APIClient()
 
     def test_list(self):
         """Testing list departments"""
         response = self.client.get('/api/v1/department/')
-        response_data = str(response.json())
-        db_data = str(json.dumps(DepartmentSerialize(Department.objects.all(), many=True).data, default=float)).replace(
-            '\"', '\'')
+        response_data = response.json()
+        db_data = Department.objects.all()
         self.assertEqual(200, response.status_code)
         self.assertNotEqual(Department.objects.count(), 0)
-        self.assertEqual(response_data, db_data)
+        for i in range(len(db_data)):
+            self.assertEqual(response_data[i].get('name'), db_data[i].name)
+
+    def test_get_employee(self):
+        """Testing get a department"""
+        response = self.client.get('/api/v1/department/1/')
+        response_data = response.json()
+        db_data = Department.objects.get(id=1)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(response_data.get('name'), db_data.name)
 
     def test_create(self):
         """Testing create a department"""
@@ -37,16 +42,14 @@ class DepartmentTestCase(APITestCase):
 
     def test_update(self):
         """Testing update a department"""
-        request = self.factory.put('/api/v1/department/', json.dumps({"name": "TEST"}),
+        response = self.client.put('/api/v1/department/1/', json.dumps({"name": "TEST"}),
                                    content_type='application/json')
-        response = DepartmentViewSet.as_view({'put': 'update'})(request, pk=1)
         self.assertEqual(200, response.status_code)
         self.assertTrue(Department.objects.filter(id=1, name='TEST').exists())
 
     def test_delete(self):
         """Testing delete a department"""
-        request = self.factory.delete('/api/v1/department/')
-        response = DepartmentViewSet.as_view({'delete': 'destroy'})(request, pk=1)
+        response = self.client.delete('/api/v1/department/1/')
         self.assertEqual(204, response.status_code)
         self.assertFalse(Department.objects.filter(id=1).exists())
 

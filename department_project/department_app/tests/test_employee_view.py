@@ -1,10 +1,9 @@
 """Module for testing Employee view"""
 import json
 
-from rest_framework.test import APITestCase, APIRequestFactory, APIClient
+from rest_framework.test import APITestCase, APIRequestFactory
 
 from department_app.models import Employee
-from department_app.rest import EmployeeSerialize
 
 
 class EmployeeTestCase(APITestCase):
@@ -14,16 +13,30 @@ class EmployeeTestCase(APITestCase):
     def setUp(self):
         """Added test client"""
         self.factory = APIRequestFactory()
-        self.client = APIClient()
 
     def test_list(self):
         """Testing list Employee model"""
         response = self.client.get('/api/v1/employee/')
-        response_data = str(response.json())
-        db_data = str(json.dumps(EmployeeSerialize(Employee.objects.all(), many=True).data)).replace('\"', '\'')
+        response_data = response.json()
+        db_data = Employee.objects.all()
         self.assertEqual(200, response.status_code)
         self.assertNotEqual(Employee.objects.count(), 0)
-        self.assertEqual(response_data, db_data)
+        for i in range(len(db_data)):
+            self.assertEqual(response_data[i].get('name'), db_data[i].name)
+            self.assertEqual(response_data[i].get('date_of_birthday'), str(db_data[i].date_of_birthday))
+            self.assertEqual(response_data[i].get('salary'), str(db_data[i].salary))
+            self.assertEqual(response_data[i].get('department'), db_data[i].department.id)
+
+    def test_get_employee(self):
+        """Testing get a employee"""
+        response = self.client.get('/api/v1/employee/1/')
+        response_data = response.json()
+        db_data = Employee.objects.get(id=1)
+        self.assertEqual(200, response.status_code)
+        self.assertEqual(response_data.get('name'), db_data.name)
+        self.assertEqual(response_data.get('date_of_birthday'), str(db_data.date_of_birthday))
+        self.assertEqual(response_data.get('salary'), str(db_data.salary))
+        self.assertEqual(response_data.get('department'), db_data.department.id)
 
     def test_create(self):
         """Testing create a employee"""
