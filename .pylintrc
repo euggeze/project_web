@@ -24,6 +24,7 @@ ignore=CVS,
         manage.py,
 	apps.py,
 	admin.py,
+	*/tests*
 
 # Add files or directories matching the regex patterns to the ignore-list. The
 # regex matches against paths.
