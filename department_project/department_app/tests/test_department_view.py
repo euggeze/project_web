@@ -1,11 +1,11 @@
 """Module for testing rest-modules"""
+import json
+
 from rest_framework.test import APITestCase, APIRequestFactory, APIClient
 
 from department_app.models import Department
 from department_app.rest import DepartmentSerialize
 from department_app.views import DepartmentViewSet
-
-import json
 
 
 class DepartmentTestCase(APITestCase):

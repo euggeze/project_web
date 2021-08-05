@@ -2,7 +2,6 @@
 from rest_framework.test import APITestCase, APIClient
 
 from department_app.models import Department
-from department_app.views import EmployeeViewSet, DepartmentViewSet
 from department_app.rest import DepartmentSerialize
 
 

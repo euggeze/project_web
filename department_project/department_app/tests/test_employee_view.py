@@ -1,11 +1,10 @@
 """Module for testing Employee view"""
+import json
+
 from rest_framework.test import APITestCase, APIRequestFactory, APIClient
 
 from department_app.models import Employee
 from department_app.rest import EmployeeSerialize
-from department_app.views import EmployeeViewSet, DepartmentViewSet
-
-import json
 
 
 class EmployeeTestCase(APITestCase):
