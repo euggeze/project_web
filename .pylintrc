@@ -24,6 +24,7 @@ ignore=CVS,
         manage.py,
 	apps.py,
 	admin.py,
+	tests,
 
 # Add files or directories matching the regex patterns to the ignore-list. The
 # regex matches against paths.
@@ -458,7 +459,7 @@ max-branches=12
 max-locals=15
 
 # Maximum number of parents for a class (see R0901).
-max-parents=7
+max-parents=14
 
 # Maximum number of public methods for a class (see R0904).
 max-public-methods=20
