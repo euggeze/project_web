@@ -11,67 +11,98 @@
                 type: 'GET',
                 url: "{% url 'employees_list' %}",
                 data: {"selected_dep": selected_dep},
+                success: function (response) {
+                       $("#table_custom tr:gt(0)").remove();
+                       for (i=0; i<response.instance.data_employee.length; i++){
+                           $("#table_custom").append(
+                            `<tr>
+                                <td>${response.instance.data_employee[i].name||""}</td>
+                                <td>${response.instance.data_employee[i].date_of_birthday||""}</td>
+                                <td>${response.instance.data_employee[i].salary||""}</td>
+                                <td><a style="cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
+                                    <a style="cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+                            </tr>`
+                    )
+                    }
+                    $("#table_custom").append(
+                            `<tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td>Average salary</td>
+                                <td>${response.instance.salary||""}</td>
+                                <td> </td>
+                            </tr>`)
+                },
+                error: function (response) {
+                    alert("Error while fetching data ");
+                }
             })
     })
     })
+
 </script>
 
 {% endblock javascript %}
 {% block up_tab %}
-          <a class="tab a_activate">Employees</a>
-          <a class="tab a", href= "{% url 'departments_list' %}">Departments</a>
+<a class="tab a_activate">Employees</a>
+<a class="tab a" , href="{% url 'departments_list' %}">Departments</a>
 {% endblock %}
 
 {% block selector %}
 
-          <p style="text-indent:100px">Select department   
-             <select onchange="" id="id_select">
-                 <option></option>
-    {% for d in data_department %}
+<p style="text-indent:100px">Select department   
+    <select onchange="" id="id_select">
+        <option></option>
+        {% for d in data_department %}
         <option> {{ d.name }}</option>
 
-    {% endfor %}
-   </select>
-{% endblock %}
+        {% endfor %}
+    </select>
+    {% endblock %}
 
-{% block yellow_div %}
-            <div style="width: 70%; float: left;padding-top:1%">
-            <p style="text-indent:100px">Date from  
-                <input type="date" id="date_from" name="date_from"/>    
-                By  
-                <input type="date" id="date_by" name="date_by"/>  </div>
-                <div style="width: 30%;
+    {% block yellow_div %}
+<div style="width: 70%; float: left;padding-top:1%">
+    <p style="text-indent:100px">Date from  
+        <input type="date" id="date_from" name="date_from"/>    
+        By  
+        <input type="date" id="date_by" name="date_by"/>  </div>
+<div style="width: 30%;
                 margin-left: 70%;
                 padding-top:1%">
-                <input type="checkbox" name="check_period" checked onchange="window.location.href='search_date.html'"> Period       
-                   <a class = "button yellow_button">Search</a>    
-                   <a class = "button red_button" >Drop</a></div>
-          </p>
+    <input type="checkbox" name="check_period" checked onchange="window.location.href='search_date.html'"> Period       
+    <a class="button yellow_button">Search</a>    
+    <a class="button red_button">Drop</a></div>
+</p>
 {% endblock %}
 
 {% block table %}
-         <tr>
-             <th>Name</th>
-             <th>Date of birthday</th>
-             <th>Salary</th>
-             <th width="75"></th>
-         </tr>
-    {% for d in data_employee %}
-        <tr>
-             <td>{{ d.name }}</td>
-             <td>{{ d.date_of_birthday }}</td>
-             <td>{{ d.salary }}</td>
-             <td><a style = "cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
-                 <a style = "cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32" ></a></td>
-         </tr>
-    {% endfor %}
+<tr>
+    <th>Name</th>
+    <th>Date of birthday</th>
+    <th>Salary</th>
+    <th width="75"></th>
+</tr>
+{% for d in data_employee %}
+<tr>
+    <td>{{ d.name }}</td>
+    <td>{{ d.date_of_birthday }}</td>
+    <td>{{ d.salary }}</td>
+    <td><a style="cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
+        <a style="cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+</tr>
+{% endfor %}
 {% for d in data %}
-        <tr>
-             <td>{{ d.name }}</td>
-             <td>{{ d.date_of_birthday }}</td>
-             <td>{{ d.salary }}</td>
-             <td><a style = "cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
-                 <a style = "cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32" ></a></td>
-         </tr>
-    {% endfor %}
+<tr>
+    <td>{{ d.name }}</td>
+    <td>{{ d.date_of_birthday }}</td>
+    <td>{{ d.salary }}</td>
+    <td><a style="cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
+        <a style="cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+</tr>
+{% endfor %}
 {% endblock %}

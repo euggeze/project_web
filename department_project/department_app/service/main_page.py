@@ -16,9 +16,11 @@ class EmployeeTemplate(TemplateView):
                 if x.get('name') == str(selected_dep):
                     id_dep = x.get('id')
                     employee = [x for x in employees if x.get('department') == id_dep]
-                    print("AAAAAAAA")
-                    args = {'data_employee': employee, 'data_department': departments}
-                    return HttpResponse(args, 200)
+                    args = {'data_employee': employee, 'salary': x.get('average_salary')}
+                    return JsonResponse({"instance": args}, status=200)
+                elif str(selected_dep) == '':
+                    args = {'data_employee': employees}
+                    return JsonResponse({"instance": args}, status=200)
         args = {'data_employee': employees, 'data_department': departments}
         return self.render_to_response(args)
 
