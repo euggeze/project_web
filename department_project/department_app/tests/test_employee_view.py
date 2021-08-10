@@ -62,6 +62,12 @@ class EmployeeTestCase(APITestCase):
         self.assertEqual(204, response.status_code)
         self.assertFalse(Employee.objects.filter(id=1).exists())
 
+    def test_delete(self):
+        """Testing delete a employee"""
+        response = self.client.delete(reverse('employee-detail', args=[1]))
+        self.assertEqual(204, response.status_code)
+        self.assertFalse(Employee.objects.filter(id=1).exists())
+
     def test_delete_department(self):
         """Testing delete a department and checking the employee in department"""
         self.client.post(reverse('employee-list'), {'name': 'TEST',

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Manager for department and employees</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'source.css' %}">
+    <script type="text/javascript" src="static/scripts.js"></script>
+</head>
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% block javascript %}
+{% endblock javascript %}
+<div class="tab">
+    {% block up_tab %}
+    {% endblock %}
+</div>
+
+<div class="green_div">
+    <div style="width: 82%; float: left;padding-top:1%">
+        {% block selector %}
+        {% endblock %}
+    </div>
+    <div style="width: 25%;
+             margin-left: 75%;
+             padding-top:1%">
+        <a class="button green_button">Add</a>
+    </div>
+    </p>
+</div>
+
+<div class="yellow_div">
+    {% block yellow_div %}
+    {% endblock %}
+</div>
+<br><br>
+
+<table class="zebra_table" id="table_custom">
+    {% block table %}
+    {% endblock %}
+</table>
+</body>
+</html>

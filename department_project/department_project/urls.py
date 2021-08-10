@@ -17,8 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 
 from department_app import urls
+from department_app.service import EmployeeTemplate, DepartmentTemplate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(urls)),
+    path('employee/', EmployeeTemplate.as_view(template_name='list_employee.html'), name='employees_list'),
+    path('', EmployeeTemplate.as_view(template_name='list_employee.html'), name='employees_list'),
+    path('department/', DepartmentTemplate.as_view(template_name='list_department.html'), name='departments_list'),
 ]
