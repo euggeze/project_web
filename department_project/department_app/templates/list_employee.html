@@ -6,37 +6,52 @@
 <script>
     $(document).ready(function () {
     $("#id_select").on('change', function (e) {
-    var selected_dep = id_select.value;
+    var department = id_select.value;
     $.ajax({
                 type: 'GET',
                 url: "{% url 'employees_list' %}",
-                data: {"selected_dep": selected_dep},
+                data: {"department": department},
                 success: function (response) {
                        $("#table_custom tr:gt(0)").remove();
-                       for (i=0; i<response.instance.data_employee.length; i++){
-                           $("#table_custom").append(
-                            `<tr>
-                                <td>${response.instance.data_employee[i].name||""}</td>
-                                <td>${response.instance.data_employee[i].date_of_birthday||""}</td>
-                                <td>${response.instance.data_employee[i].salary||""}</td>
-                                <td><a style="cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
-                                    <a style="cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
-                            </tr>`
-                    )
+                        for (i =0; i<response.data_employee_new.length; i++){
+                         var a =
+                         `<tr>
+                            <td>${response.data_employee_new[i].id||""}</td>
+                            <td>${response.data_employee_new[i].full_name||""}</td>
+                            <td>${response.data_employee_new[i].date_of_birthday||""}</td>
+                            <td>${response.data_employee_new[i].salary||""}</td>
+                            <td><a style="cursor: pointer;"}>`
+                           {% for d in data_employee %}
+                                if ( {{ d.id }} == response.data_employee_new[i].id){
+                                a += `<img src="{% static 'trash.png'%}" width="32" height="32"></a>
+                                <a style="cursor: pointer;" href= {% url 'employees_edit' pk=d.id %}>
+                                <img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+                                }
+                            </tr>`}
+                           {% endfor %}
+                            $("#table_custom").append(a);
+                            };
+                    if (department != '') {
+                    {% for d in data_department %}
+                    if ( {{ d.id }} == response.data_employee_new[0].department){
+                        a = {{ d.average_salary }};
                     }
+                    {% endfor %}
                     $("#table_custom").append(
                             `<tr>
                                 <td> </td>
                                 <td> </td>
                                 <td> </td>
                                 <td> </td>
+                                <td> </td>
                             </tr>
                             <tr>
                                 <td> </td>
-                                <td>Average salary</td>
-                                <td>${response.instance.salary||""}</td>
                                 <td> </td>
-                            </tr>`)
+                                <td>Average salary</td>
+                                <td> ${a||""} </td>
+                                <td> </td>
+                            </tr>`)}
                 },
                 error: function (response) {
                     alert("Error while fetching data ");
@@ -44,6 +59,7 @@
             })
     })
     })
+
 
 </script>
 
@@ -59,29 +75,33 @@
     <select onchange="" id="id_select">
         <option></option>
         {% for d in data_department %}
-        <option> {{ d.name }}</option>
+        <option> {{ d.full_name }}</option>
 
         {% endfor %}
     </select>
     {% endblock %}
 
     {% block yellow_div %}
-<div style="width: 70%; float: left;padding-top:1%">
-    <p style="text-indent:100px">Date from  
-        <input type="date" id="date_from" name="date_from"/>    
-        By  
-        <input type="date" id="date_by" name="date_by"/>  </div>
-<div style="width: 30%;
+<div class="yellow_div">
+    <div style="width: 70%; float: left;padding-top:1%">
+        <p style="text-indent:100px">Date from  
+            <input type="date" id="date_from" name="date_from" />    
+            By  
+            <input type="date" id="date_by" name="date_by"/>  </div>
+    <div style="width: 30%;
                 margin-left: 70%;
                 padding-top:1%">
-    <input type="checkbox" name="check_period" checked onchange="window.location.href='search_date.html'"> Period       
-    <a class="button yellow_button">Search</a>    
-    <a class="button red_button">Drop</a></div>
-</p>
+        <input type="checkbox" name="check_period" checked>
+        Period       
+        <a class="button yellow_button">Search</a>    
+        <a class="button red_button">Drop</a></div>
+    </p>
+</div>
 {% endblock %}
 
 {% block table %}
 <tr>
+    <th>ID</th>
     <th>Name</th>
     <th>Date of birthday</th>
     <th>Salary</th>
@@ -89,20 +109,13 @@
 </tr>
 {% for d in data_employee %}
 <tr>
-    <td>{{ d.name }}</td>
+    <td>{{ d.id }}</td>
+    <td>{{ d.full_name }}</td>
     <td>{{ d.date_of_birthday }}</td>
     <td>{{ d.salary }}</td>
-    <td><a style="cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
-        <a style="cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+    <td><a style="cursor: pointer;" ><img src="{% static 'trash.png'%}" width="32" height="32"></a>
+        <a style="cursor: pointer;" href="{% url 'employees_edit' pk=d.id %}"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
 </tr>
 {% endfor %}
-{% for d in data %}
-<tr>
-    <td>{{ d.name }}</td>
-    <td>{{ d.date_of_birthday }}</td>
-    <td>{{ d.salary }}</td>
-    <td><a style="cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
-        <a style="cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
-</tr>
-{% endfor %}
+
 {% endblock %}

@@ -1,5 +1,5 @@
 import requests
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 
 from django.views.generic import TemplateView
 from rest_framework.reverse import reverse
@@ -8,21 +8,24 @@ from rest_framework.reverse import reverse
 class EmployeeTemplate(TemplateView):
 
     def get(self, request, *args, **kwargs):
-        employees = requests.get('http://127.0.0.1:8000' + reverse('employee-list')).json()
-        departments = requests.get('http://127.0.0.1:8000' + reverse('department-list')).json()
-        if request.is_ajax:
-            selected_dep = request.GET.get("selected_dep", None)
-            for x in departments:
-                if x.get('name') == str(selected_dep):
-                    id_dep = x.get('id')
-                    employee = [x for x in employees if x.get('department') == id_dep]
-                    args = {'data_employee': employee, 'salary': x.get('average_salary')}
-                    return JsonResponse({"instance": args}, status=200)
-                elif str(selected_dep) == '':
-                    args = {'data_employee': employees}
-                    return JsonResponse({"instance": args}, status=200)
+        sel_department = request.GET.get("department", None)
+        departments = requests.get(reverse('department-list', request=request)).json()
+        if sel_department is None or sel_department is '':
+            employees = requests.get(reverse('employee-list', request=request)).json()
+        else:
+            employees = requests.get(reverse('employee-list', request=request)+'?department='+sel_department).json()
+        if request.is_ajax():
+            args = {'data_employee_new': employees}
+            return JsonResponse(args)
         args = {'data_employee': employees, 'data_department': departments}
         return self.render_to_response(args)
+
+
+class EmployeeEdit(TemplateView):
+
+    def get(self, request, *args, **kwargs):
+        employee = requests.put('http://127.0.0.1:8000' + reverse('employee-detail', args=['pk']).json())
+        return self.render_to_response(employee)
 
 
 class DepartmentTemplate(TemplateView):
