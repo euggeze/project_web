@@ -1,16 +1,13 @@
-function delete_func() {
+function delete_func(id) {
     if (confirm("Are you sure want to delete this entry?")) {
-       document.location.href = 'deleted_empl.html'
-    }
-    else{
-       //undo delete 
-    }
-  }
- function delete_func_dep() {
-    if (confirm("Are you sure want to delete this entry?")) {
-       document.location.href = 'deleted_dep.html'
+       {% url 'employees_list' pk=1 %}
     }
     else{
        //undo delete
+    }
+  }
+ function delete_func_dep(id) {
+    if (confirm("Are you sure want to delete this entry?")) {
+       alert (id)
     }
   }

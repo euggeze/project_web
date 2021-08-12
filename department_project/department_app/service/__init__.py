@@ -1,1 +1,3 @@
-from department_app.service.main_page import EmployeeTemplate, DepartmentTemplate, EmployeeEdit
+"""Module for combining services"""
+from department_app.service.employee_service import EmployeeTemplate, EmployeeEdit, EmployeeDelete
+from department_app.service.department_service import DepartmentTemplate

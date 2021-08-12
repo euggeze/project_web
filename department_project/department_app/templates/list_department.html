@@ -14,7 +14,7 @@
          </tr>
     {% for d in data_department %}
         <tr>
-             <td>{{ d.name }}</td>
+             <td>{{ d.full_name }}</td>
              <td><a style = "cursor: pointer;"><img src="{% static 'trash.png' %}" width="32" height="32"></a>
                  <a style = "cursor: pointer;"><img src="{% static 'pencil.png' %}" width="32" height="32" ></a></td>
          </tr>

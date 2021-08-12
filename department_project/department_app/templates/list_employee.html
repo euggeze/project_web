@@ -19,11 +19,12 @@
                             <td>${response.data_employee_new[i].id||""}</td>
                             <td>${response.data_employee_new[i].full_name||""}</td>
                             <td>${response.data_employee_new[i].date_of_birthday||""}</td>
-                            <td>${response.data_employee_new[i].salary||""}</td>
-                            <td><a style="cursor: pointer;"}>`
+                            <td>${response.data_employee_new[i].salary||""}</td>`
+
                            {% for d in data_employee %}
                                 if ( {{ d.id }} == response.data_employee_new[i].id){
-                                a += `<img src="{% static 'trash.png'%}" width="32" height="32"></a>
+                                a += `<td><a style="cursor: pointer;" onclick="delete_func({{ d.id }})">
+                                <img src="{% static 'trash.png'%}" width="32" height="32"></a>
                                 <a style="cursor: pointer;" href= {% url 'employees_edit' pk=d.id %}>
                                 <img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
                                 }
@@ -59,10 +60,23 @@
             })
     })
     })
-
-
 </script>
 
+<script>
+function delete_func(id_employee) {
+    if (confirm("Are you sure want to delete this entry?")) {
+       $.ajax({
+                type: 'GET',
+                url: "{% url 'employees_delete' %}",
+                data: {"id": id_employee},
+                success: function (response) {
+                alert ("Entry has been deleted ");
+                location.reload(true);
+                }
+            })
+    }
+  }
+</script>
 {% endblock javascript %}
 {% block up_tab %}
 <a class="tab a_activate">Employees</a>
@@ -113,7 +127,7 @@
     <td>{{ d.full_name }}</td>
     <td>{{ d.date_of_birthday }}</td>
     <td>{{ d.salary }}</td>
-    <td><a style="cursor: pointer;" ><img src="{% static 'trash.png'%}" width="32" height="32"></a>
+    <td><a style="cursor: pointer;" onclick="delete_func({{ d.id }})"><img src="{% static 'trash.png'%}" width="32" height="32"></a>
         <a style="cursor: pointer;" href="{% url 'employees_edit' pk=d.id %}"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
 </tr>
 {% endfor %}
