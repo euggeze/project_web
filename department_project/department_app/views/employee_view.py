@@ -12,6 +12,7 @@ class EmployeeViewSet(ModelViewSet):
     queryset = Employee.objects.all()
 
     def get_queryset(self):
+        """Custom function for working with a filter"""
         queryset = self.queryset
         selected_department = self.request.GET.get("department", None)
         if selected_department is not '' and selected_department is not None:
@@ -20,4 +21,3 @@ class EmployeeViewSet(ModelViewSet):
             return query_set
         query_set = queryset.all()
         return query_set
-

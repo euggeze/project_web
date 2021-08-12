@@ -14,7 +14,7 @@ class EmployeeTemplate(TemplateView):
         """ Function get for list employee"""
         sel_department = request.GET.get("department", None)
         departments = requests.get(reverse('department-list', request=request)).json()
-        if sel_department is None or sel_department is '':
+        if sel_department is None or sel_department == '':
             employees = requests.get(reverse('employee-list', request=request)).json()
         else:
             employees = requests.get(reverse('employee-list', request=request) + '?department=' + sel_department).json()
@@ -51,6 +51,3 @@ class EmployeeDelete(TemplateView):
         id_employee = self.request.GET.get("id", None)
         requests.delete(reverse('employee-detail', request=request, args=[id_employee]))
         return redirect('employees_list')
-
-
-
