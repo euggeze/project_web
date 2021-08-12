@@ -15,7 +15,7 @@ class EmployeeViewSet(ModelViewSet):
         """Custom function for working with a filter"""
         queryset = self.queryset
         selected_department = self.request.GET.get("department", None)
-        if selected_department is not '' and selected_department is not None:
+        if selected_department != '' and selected_department is not None:
             id_dep = Department.objects.get(full_name=selected_department).id
             query_set = queryset.filter(department=id_dep)
             return query_set
