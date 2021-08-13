@@ -16,6 +16,7 @@ class EmployeeTemplate(TemplateView):
         departments = requests.get(reverse('department-list', request=self.request)).json()
         start = request.GET.get("start", '')
         end = request.GET.get("end", '')
+        filter_query = '?department='+sel_department+'&start='+start+'&end='+end
         employees = requests.get(reverse('employee-list', request=self.request) + filter_query).json()
         if request.is_ajax():
             args = {'data_employee_new': employees}
