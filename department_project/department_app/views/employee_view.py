@@ -14,10 +14,15 @@ class EmployeeViewSet(ModelViewSet):
     def get_queryset(self):
         """Custom function for working with a filter"""
         queryset = self.queryset
+        queryset = queryset.all()
         selected_department = self.request.GET.get("department", None)
+        start = self.request.GET.get("start", None)
+        end = self.request.GET.get("end", None)
         if selected_department != '' and selected_department is not None:
             id_dep = Department.objects.get(full_name=selected_department).id
-            query_set = queryset.filter(department=id_dep)
-            return query_set
-        query_set = queryset.all()
-        return query_set
+            queryset = queryset.filter(department=id_dep)
+        if start and end:
+            queryset = queryset.filter(date_of_birthday__range=[start, end])
+        elif start and not end:
+            queryset = queryset.filter(date_of_birthday=start)
+        return queryset

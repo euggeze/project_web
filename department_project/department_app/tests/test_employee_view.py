@@ -4,7 +4,7 @@ import json
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase
 
-from department_app.models import Employee
+from department_app.models import Employee, Department
 
 
 class EmployeeTestCase(APITestCase):
@@ -16,6 +16,32 @@ class EmployeeTestCase(APITestCase):
         response = self.client.get(reverse('employee-list'))
         response_data = response.json()
         db_data = Employee.objects.all()
+        self.assertEqual(200, response.status_code)
+        self.assertNotEqual(Employee.objects.count(), 0)
+        for i in range(len(db_data)):
+            self.assertEqual(response_data[i].get('full_name'), db_data[i].full_name)
+            self.assertEqual(response_data[i].get('date_of_birthday'), str(db_data[i].date_of_birthday))
+            self.assertEqual(response_data[i].get('salary'), str(db_data[i].salary))
+            self.assertEqual(response_data[i].get('department'), db_data[i].department.id)
+
+    def test_list_department_employee(self):
+        """Testing list Employee model with filter"""
+        response = self.client.get(reverse('employee-list')+'?department=Testing')
+        response_data = response.json()
+        db_data = Employee.objects.filter(department=Department.objects.get(full_name='Testing'))
+        self.assertEqual(200, response.status_code)
+        self.assertNotEqual(Employee.objects.count(), 0)
+        for i in range(len(db_data)):
+            self.assertEqual(response_data[i].get('full_name'), db_data[i].full_name)
+            self.assertEqual(response_data[i].get('date_of_birthday'), str(db_data[i].date_of_birthday))
+            self.assertEqual(response_data[i].get('salary'), str(db_data[i].salary))
+            self.assertEqual(response_data[i].get('department'), db_data[i].department.id)
+
+    def test_list_dob_employee(self):
+        """Testing list Employee model with filter"""
+        response = self.client.get(reverse('employee-list')+'?start=1994-07-04')
+        response_data = response.json()
+        db_data = Employee.objects.filter(date_of_birthday='1994-07-04')
         self.assertEqual(200, response.status_code)
         self.assertNotEqual(Employee.objects.count(), 0)
         for i in range(len(db_data)):

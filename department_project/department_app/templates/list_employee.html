@@ -60,6 +60,8 @@
             })
     })
     })
+
+
 </script>
 
 <script>
@@ -72,12 +74,150 @@ function delete_func(id_employee) {
                 success: function (response) {
                 alert ("Entry has been deleted ");
                 location.reload(true);
+                },
+                error: function (response) {
+                    alert("Error while deleting data ");
                 }
             })
     }
   }
+
+
+</script>
+
+<script>
+function change_checkbox() {
+    if (check_period.checked){
+        date_by.removeAttribute("readonly");
+    }
+    else {
+        date_by.value = null;
+        date_by.setAttribute("readonly","readonly");
+    }
+  }
+
+
+</script>
+
+<script>
+function search_button() {
+    var department = id_select.value;
+    var start = date_from.value
+    var end = date_by.value
+    $.ajax({
+                type: 'GET',
+                url: "{% url 'employees_list' %}",
+                data: {"department": department, "start" : start, "end" : end},
+                success: function (response) {
+                       $("#table_custom tr:gt(0)").remove();
+                        for (i =0; i<response.data_employee_new.length; i++){
+                         var a =
+                         `<tr>
+                            <td>${response.data_employee_new[i].id||""}</td>
+                            <td>${response.data_employee_new[i].full_name||""}</td>
+                            <td>${response.data_employee_new[i].date_of_birthday||""}</td>
+                            <td>${response.data_employee_new[i].salary||""}</td>`
+
+                           {% for d in data_employee %}
+                                if ( {{ d.id }} == response.data_employee_new[i].id){
+                                a += `<td><a style="cursor: pointer;" onclick="delete_func({{ d.id }})">
+                                <img src="{% static 'trash.png'%}" width="32" height="32"></a>
+                                <a style="cursor: pointer;" href= {% url 'employees_edit' pk=d.id %}>
+                                <img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+                                }
+                            </tr>`}
+                           {% endfor %}
+                            $("#table_custom").append(a);
+                            };
+                    if (department != '') {
+                    {% for d in data_department %}
+                    if ( {{ d.id }} == response.data_employee_new[0].department){
+                        a = {{ d.average_salary }};
+                    }
+                    {% endfor %}
+                    $("#table_custom").append(
+                            `<tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td>Average salary</td>
+                                <td> ${a||""} </td>
+                                <td> </td>
+                            </tr>`)}
+                },
+                error: function (response) {
+                    alert("Error while fetching data ");
+                }
+            })
+  }
+
+  $(document).ready(function () {
+    $("#drop_button").on('click', function (e) {
+    var department = id_select.value;
+    $.ajax({
+                type: 'GET',
+                url: "{% url 'employees_list' %}",
+                data: {"department": department},
+                success: function (response) {
+                       $("#table_custom tr:gt(0)").remove();
+                        for (i =0; i<response.data_employee_new.length; i++){
+                         var a =
+                         `<tr>
+                            <td>${response.data_employee_new[i].id||""}</td>
+                            <td>${response.data_employee_new[i].full_name||""}</td>
+                            <td>${response.data_employee_new[i].date_of_birthday||""}</td>
+                            <td>${response.data_employee_new[i].salary||""}</td>`
+
+                           {% for d in data_employee %}
+                                if ( {{ d.id }} == response.data_employee_new[i].id){
+                                a += `<td><a style="cursor: pointer;" onclick="delete_func({{ d.id }})">
+                                <img src="{% static 'trash.png'%}" width="32" height="32"></a>
+                                <a style="cursor: pointer;" href= {% url 'employees_edit' pk=d.id %}>
+                                <img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+                                }
+                            </tr>`}
+                           {% endfor %}
+                            $("#table_custom").append(a);
+                            };
+                    if (department != '') {
+                    {% for d in data_department %}
+                    if ( {{ d.id }} == response.data_employee_new[0].department){
+                        a = {{ d.average_salary }};
+                    }
+                    {% endfor %}
+                    $("#table_custom").append(
+                            `<tr>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td> </td>
+                                <td> </td>
+                                <td>Average salary</td>
+                                <td> ${a||""} </td>
+                                <td> </td>
+                            </tr>`)}
+                },
+                error: function (response) {
+                    alert("Error while fetching data ");
+                }
+            })
+    })
+    })
+
+
 </script>
 {% endblock javascript %}
+
 {% block up_tab %}
 <a class="tab a_activate">Employees</a>
 <a class="tab a" , href="{% url 'departments_list' %}">Departments</a>
@@ -86,29 +226,30 @@ function delete_func(id_employee) {
 {% block selector %}
 
 <p style="text-indent:100px">Select department   
-    <select onchange="" id="id_select">
-        <option></option>
+    <select id="id_select">
+        <option selected="selected"></option>
         {% for d in data_department %}
         <option> {{ d.full_name }}</option>
 
         {% endfor %}
     </select>
     {% endblock %}
-
+    {% block add_button %}<a class="button green_button" href="{% url 'employees_create' %}">Add</a>
+    {% endblock %}
     {% block yellow_div %}
 <div class="yellow_div">
     <div style="width: 70%; float: left;padding-top:1%">
         <p style="text-indent:100px">Date from  
-            <input type="date" id="date_from" name="date_from" />    
+            <input type="date" id="date_from"/>    
             By  
-            <input type="date" id="date_by" name="date_by"/>  </div>
+            <input type="date" id="date_by"/>  </div>
     <div style="width: 30%;
                 margin-left: 70%;
                 padding-top:1%">
-        <input type="checkbox" name="check_period" checked>
+        <input type="checkbox" id="check_period" onchange="change_checkbox()" checked>
         Period       
-        <a class="button yellow_button">Search</a>    
-        <a class="button red_button">Drop</a></div>
+        <a class="button yellow_button" onclick="search_button()">Search</a>    
+        <a class="button red_button" id="drop_button">Drop</a></div>
     </p>
 </div>
 {% endblock %}
@@ -127,8 +268,10 @@ function delete_func(id_employee) {
     <td>{{ d.full_name }}</td>
     <td>{{ d.date_of_birthday }}</td>
     <td>{{ d.salary }}</td>
-    <td><a style="cursor: pointer;" onclick="delete_func({{ d.id }})"><img src="{% static 'trash.png'%}" width="32" height="32"></a>
-        <a style="cursor: pointer;" href="{% url 'employees_edit' pk=d.id %}"><img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
+    <td><a style="cursor: pointer;" onclick="delete_func({{ d.id }})"><img src="{% static 'trash.png'%}" width="32"
+                                                                           height="32"></a>
+        <a style="cursor: pointer;" href="{% url 'employees_edit' pk=d.id %}"><img src="{% static 'pencil.png' %}"
+                                                                                   width="32" height="32"></a></td>
 </tr>
 {% endfor %}
 

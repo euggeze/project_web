@@ -12,16 +12,32 @@ class EmployeeTemplate(TemplateView):
 
     def get(self, request, *args, **kwargs):
         """ Function get for list employee"""
-        sel_department = request.GET.get("department", None)
-        departments = requests.get(reverse('department-list', request=request)).json()
-        if sel_department is None or sel_department == '':
-            employees = requests.get(reverse('employee-list', request=request)).json()
-        else:
-            employees = requests.get(reverse('employee-list', request=request) + '?department=' + sel_department).json()
+        sel_department = request.GET.get("department", '')
+        departments = requests.get(reverse('department-list', request=self.request)).json()
+        start = request.GET.get("start", '')
+        end = request.GET.get("end", '')
+        employees = requests.get(reverse('employee-list', request=self.request) + filter_query).json()
         if request.is_ajax():
             args = {'data_employee_new': employees}
             return JsonResponse(args)
         args = {'data_employee': employees, 'data_department': departments}
+        return self.render_to_response(args)
+
+
+class EmployeeCreate(TemplateView):
+    """ Template for view create employee"""
+
+    def get(self, request, *args, **kwargs):
+        """ Function get for create employee"""
+        if self.request.GET.get('full_name', None):
+            employee = {'full_name': self.request.GET.get('full_name', None),
+                        'date_of_birthday': self.request.GET.get('date_by', None),
+                        'salary': self.request.GET.get('salary', None),
+                        'department': int(self.request.GET.get('department', None))}
+            requests.post(reverse('employee-list', request=self.request), data=employee)
+            return redirect('employees_list')
+        departments = requests.get(reverse('department-list', request=self.request)).json()
+        args = {'data_department': departments}
         return self.render_to_response(args)
 
 
@@ -35,10 +51,10 @@ class EmployeeEdit(TemplateView):
                         'date_of_birthday': self.request.GET.get('date_by', None),
                         'salary': self.request.GET.get('salary', None),
                         'department': int(self.request.GET.get('department', None))}
-            requests.put(reverse('employee-detail', request=request, args=[self.kwargs['pk']]), data=employee)
+            requests.put(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']]), data=employee)
             return redirect('employees_list')
-        departments = requests.get(reverse('department-list', request=request)).json()
-        employee = requests.get(reverse('employee-detail', request=request, args=[self.kwargs['pk']])).json()
+        departments = requests.get(reverse('department-list', request=self.request)).json()
+        employee = requests.get(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']])).json()
         args = {'data_employee': employee, 'data_department': departments}
         return self.render_to_response(args)
 
@@ -49,5 +65,5 @@ class EmployeeDelete(TemplateView):
     def get(self, request, *args, **kwargs):
         """ Function get for delete employee"""
         id_employee = self.request.GET.get("id", None)
-        requests.delete(reverse('employee-detail', request=request, args=[id_employee]))
+        requests.delete(reverse('employee-detail', request=self.request, args=[id_employee]))
         return redirect('employees_list')
