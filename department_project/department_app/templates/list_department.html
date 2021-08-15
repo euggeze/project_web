@@ -4,26 +4,9 @@
 
 {% block javascript %}
 <script>
-function delete_func(id_department) {
-    if (confirm("Are you sure want to delete this entry?")) {
-       $.ajax({
-                type: 'GET',
-                url: "{% url 'departments_delete' %}",
-                data: {"id": id_department},
-                success: function (response) {
-                alert ("Entry has been deleted ");
-                location.reload(true);
-                },
-                error: function (response) {
-                    alert("Error while deleting data ");
-                }
-            })
-    }
-  }
-
-
-
+    var delete_variable = "{% url 'departments_delete' %}";
 </script>
+<script type="text/javascript" src="{% static 'js/deleting.js' %}"></script>
 {% endblock %}
 
 {% block up_tab %}

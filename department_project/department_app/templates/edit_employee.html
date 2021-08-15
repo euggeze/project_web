@@ -2,23 +2,9 @@
 
 {% load static %}
 {% block javascript %}
-<script>
-function check_changed(data_employee){
-    if (id_name.value != data_employee.full_name ||
-        id_date.value != data_employee.date_of_birthday ||
-        id_salary.value != data_employee.salary ){
-        if (confirm("Are you sure want to exit?")) {
-            document.location.href = {% url 'employees_list' %}
-            }
-    }
-    else{
-        document.location.href = {% url 'employees_list' %}
-    }
-}
-
-
-</script>
+<script type="text/javascript" src="{% static 'js/checking_data.js' %}"></script>
 {% endblock %}
+
 {% block up_tab %}
 <a class="tab a_activate" href="{% url 'employees_list' %}">Employees</a>
 <a class="tab a" , href="{% url 'departments_list' %}">Departments</a>
@@ -60,7 +46,7 @@ function check_changed(data_employee){
     </div>
     <div style="width: 50%; float: left;padding-top:1%">
         <p align=right style="margin-right: 40px;"><a class="button red_button"
-                                                      onclick="check_changed({{ data_employee }})">Cancel</a></p>
+                                                      onclick="check_changed_employee({{ data_employee }}, {% url 'employees_list' %})">Cancel</a></p>
     </div>
     <div style="width: 50%;
            margin-left: 50%;

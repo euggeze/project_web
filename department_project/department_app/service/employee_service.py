@@ -12,12 +12,18 @@ class EmployeeTemplate(TemplateView):
 
     def get(self, request, *args, **kwargs):
         """ Function get for list employee"""
+        try:
+            departments = requests.get(reverse('department-list', request=self.request)).json()
+        except ValueError:
+            departments = requests.get(reverse('department-list', request=self.request))
         sel_department = request.GET.get("department", '')
-        departments = requests.get(reverse('department-list', request=self.request)).json()
         start = request.GET.get("start", '')
         end = request.GET.get("end", '')
         filter_query = '?department='+sel_department+'&start='+start+'&end='+end
-        employees = requests.get(reverse('employee-list', request=self.request) + filter_query).json()
+        try:
+            employees = requests.get(reverse('employee-list', request=self.request) + filter_query).json()
+        except ValueError:
+            employees = requests.get(reverse('employee-list', request=self.request) + filter_query)
         if request.is_ajax():
             args = {'data_employee_new': employees}
             return JsonResponse(args)
@@ -37,7 +43,10 @@ class EmployeeCreate(TemplateView):
                         'department': int(self.request.GET.get('department', None))}
             requests.post(reverse('employee-list', request=self.request), data=employee)
             return redirect('employees_list')
-        departments = requests.get(reverse('department-list', request=self.request)).json()
+        try:
+            departments = requests.get(reverse('department-list', request=self.request)).json()
+        except ValueError:
+            departments = requests.get(reverse('department-list', request=self.request))
         args = {'data_department': departments}
         return self.render_to_response(args)
 
@@ -54,8 +63,14 @@ class EmployeeEdit(TemplateView):
                         'department': int(self.request.GET.get('department', None))}
             requests.put(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']]), data=employee)
             return redirect('employees_list')
-        departments = requests.get(reverse('department-list', request=self.request)).json()
-        employee = requests.get(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']])).json()
+        try:
+            departments = requests.get(reverse('department-list', request=self.request)).json()
+        except ValueError:
+            departments = requests.get(reverse('department-list', request=self.request))
+        try:
+            employee = requests.get(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']])).json()
+        except ValueError:
+            employee = requests.get(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']]))
         args = {'data_employee': employee, 'data_department': departments}
         return self.render_to_response(args)
 

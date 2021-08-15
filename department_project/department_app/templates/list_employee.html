@@ -60,45 +60,12 @@
             })
     })
     })
-
-
 </script>
-
 <script>
-function delete_func(id_employee) {
-    if (confirm("Are you sure want to delete this entry?")) {
-       $.ajax({
-                type: 'GET',
-                url: "{% url 'employees_delete' %}",
-                data: {"id": id_employee},
-                success: function (response) {
-                alert ("Entry has been deleted ");
-                location.reload(true);
-                },
-                error: function (response) {
-                    alert("Error while deleting data ");
-                }
-            })
-    }
-  }
-
-
+    var delete_variable = "{% url 'employees_delete' %}";
 </script>
-
-<script>
-function change_checkbox() {
-    if (check_period.checked){
-        date_by.removeAttribute("readonly");
-    }
-    else {
-        date_by.value = null;
-        date_by.setAttribute("readonly","readonly");
-    }
-  }
-
-
-</script>
-
+<script type="text/javascript" src="{% static 'js/deleting.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/check_box.js' %}"></script>
 <script>
 function search_button() {
     var department = id_select.value;
@@ -120,7 +87,7 @@ function search_button() {
 
                            {% for d in data_employee %}
                                 if ( {{ d.id }} == response.data_employee_new[i].id){
-                                a += `<td><a style="cursor: pointer;" onclick="delete_func({{ d.id }})">
+                                a += `<td><a style="cursor: pointer;" onclick="delete_func_employee({{ d.id }})">
                                 <img src="{% static 'trash.png'%}" width="32" height="32"></a>
                                 <a style="cursor: pointer;" href= {% url 'employees_edit' pk=d.id %}>
                                 <img src="{% static 'pencil.png' %}" width="32" height="32"></a></td>
@@ -262,6 +229,7 @@ function search_button() {
     <th>Salary</th>
     <th width="75"></th>
 </tr>
+
 {% for d in data_employee %}
 <tr>
     <td>{{ d.id }}</td>

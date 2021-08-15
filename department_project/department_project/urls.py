@@ -23,7 +23,8 @@ from department_app.service import EmployeeTemplate, EmployeeEdit, EmployeeDelet
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(urls)),
-    path('', EmployeeTemplate.as_view(template_name='list_employee.html'), name='employees_list'),
+    path('', EmployeeTemplate.as_view(template_name='list_employee.html'), name='employees_list_start'),
+    path('employee/', EmployeeTemplate.as_view(template_name='list_employee.html'), name='employees_list'),
     path('employee/edit/<int:pk>/', EmployeeEdit.as_view(template_name='edit_employee.html'), name='employees_edit'),
     path('employee/delete/', EmployeeDelete.as_view(), name='employees_delete'),
     path('employee/create/', EmployeeCreate.as_view(template_name='create_employee.html'), name='employees_create'),
