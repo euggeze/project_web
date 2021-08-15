@@ -9,7 +9,8 @@ from rest_framework.test import APITestCase
 @requests_mock.Mocker()
 class DepartmentServiceTestCase(APITestCase):
     """Class for testing templates for department view"""
-
+    adapter = requests_mock.Adapter()
+    
     def test_list_template(self, mocker):
         """Testing list Department template"""
         mocker.get(reverse('department-list'))
@@ -29,3 +30,12 @@ class DepartmentServiceTestCase(APITestCase):
             reverse('departments_create') + '?full_name=TEST')
         self.assertEqual(reverse('departments_list'), response.url)
         self.assertEqual(302, response.status_code)
+
+    def test_delete_template(self, mocker):
+        """Testing delete Department template"""
+        self.adapter.register_uri('GET', reverse('department-detail', args=[10]), json={'id': 10,
+                                                                                        'full_name': 'TEST'})
+        mocker.delete(reverse('department-detail', args=[10]))
+        response = self.client.get(reverse('departments_delete') + '?id=10')
+        self.assertEqual(302, response.status_code)
+        self.assertEqual(reverse('departments_list'), response.url)
