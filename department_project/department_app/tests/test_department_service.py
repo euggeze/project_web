@@ -26,6 +26,6 @@ class DepartmentServiceTestCase(APITestCase):
         """Testing finish create Department template"""
         mocker.post(reverse('department-list'))
         response = self.client.get(
-            reverse('departments_create') + '?department=Testing')
+            reverse('departments_create') + '?full_name=TEST')
         self.assertEqual(reverse('departments_list'), response.url)
         self.assertEqual(302, response.status_code)
