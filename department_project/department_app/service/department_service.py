@@ -10,8 +10,11 @@ class DepartmentTemplate(TemplateView):
 
     def get(self, request, *args, **kwargs):
         """ Function get for list department"""
-        department = requests.get(reverse('department-list', request=self.request))
-        args = {'data_department': department.json()}
+        try:
+            department = requests.get(reverse('department-list', request=self.request)).json()
+        except ValueError:
+            department = requests.get(reverse('department-list', request=self.request))
+        args = {'data_department': department}
         return self.render_to_response(args)
 
 

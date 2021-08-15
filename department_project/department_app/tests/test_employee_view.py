@@ -50,6 +50,19 @@ class EmployeeTestCase(APITestCase):
             self.assertEqual(response_data[i].get('salary'), str(db_data[i].salary))
             self.assertEqual(response_data[i].get('department'), db_data[i].department.id)
 
+    def test_list_range_dob_employee(self):
+        """Testing list Employee model with filter"""
+        response = self.client.get(reverse('employee-list')+'?start=1994-07-04&end=1996-07-04')
+        response_data = response.json()
+        db_data = Employee.objects.filter(date_of_birthday__range=['1994-07-04', '1996-07-04'])
+        self.assertEqual(200, response.status_code)
+        self.assertNotEqual(Employee.objects.count(), 0)
+        for i in range(len(db_data)):
+            self.assertEqual(response_data[i].get('full_name'), db_data[i].full_name)
+            self.assertEqual(response_data[i].get('date_of_birthday'), str(db_data[i].date_of_birthday))
+            self.assertEqual(response_data[i].get('salary'), str(db_data[i].salary))
+            self.assertEqual(response_data[i].get('department'), db_data[i].department.id)
+
     def test_get_employee(self):
         """Testing get a employee"""
         response = self.client.get(reverse('employee-detail', args=[1]))
