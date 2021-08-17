@@ -33,29 +33,26 @@ class EmployeeServiceTestCase(APITestCase):
         mocker.get(reverse('employees_list'))
         response = self.client.get(
             reverse('employees_create') + '?department=1&full_name=Test&date_by=2001-01-01&salary=111')
-        self.assertEqual(reverse('employees_list'), response.url)
-        self.assertEqual(302, response.status_code)
+        self.assertEqual(200, response.status_code)
 
     def test_delete_template(self, mocker):
-        """Testing delete Employee template"""
         self.adapter.register_uri('GET', reverse('employee-detail', args=[10]), json={'id': 10,
                                                                                       'full_name': 'TEST',
                                                                                       'date_of_birthday': '1999-09-09',
                                                                                       'salary': 1250.50,
                                                                                       'department': 1})
         mocker.delete(reverse('employee-detail', args=[10]))
-        response = self.client.get(reverse('employees_delete') + '?id=10')
+        response = self.client.post(reverse('employees_delete'), data={'id': 10})
         self.assertEqual(302, response.status_code)
-        self.assertEqual(reverse('employees_list'), response.url)
-"""
-    def test_update_template(self, mocker):
+
+"""     def test_update_template(self, mocker):
         self.adapter.register_uri('GET', reverse('employee-detail', args=[10]), json={'id': 10,
                                                                                       'full_name': 'TEST',
                                                                                       'date_of_birthday': '1999-09-09',
                                                                                       'salary': 1250.50,
                                                                                       'department': 1})
         mocker.get(reverse('department-list'))
-        mocker.get(reverse('employees_list'))
+        mocker.get(reverse('department-detail', args=[1]))
         mocker.get(reverse('employee-detail', args=[10]))
         response = self.client.get(reverse('employees_edit', args=[10]))
         self.assertEqual(302, response.status_code)

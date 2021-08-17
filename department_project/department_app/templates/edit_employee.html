@@ -19,7 +19,7 @@
     <p align=right style="margin-right:40px">Date of birthday:</p>
     <p align=right style="margin-right:40px">Salary:</p>
 </div>
-<form action="{% url 'employees_edit' pk=data_employee.id %}" method='GET'>
+<form action="{% url 'employees_edit' pk=data_employee.id %}" method='POST'>
     {% csrf_token %}
     <div style="width: 50%;
            margin-left: 50%;
@@ -39,7 +39,7 @@
 
         <p><input type="text" id="id_name" name="full_name" size="15" style="font-size: 16;"
                   value="{{ data_employee.full_name }}"></p>
-        <p><input type="date" id="id_date" name="date_by" value="{{ data_employee.date_of_birthday }}"/>
+        <p><input type="date" id="id_date" name="date_of_birthday" value="{{ data_employee.date_of_birthday }}"/>
         <p><input type="text" id="id_salary" name="salary" size="15" style="font-size: 16;"
                   value="{{ data_employee.salary }}"></p>
 

@@ -16,7 +16,8 @@
     <p align=right style="margin-right:40px">Date of birthday:</p>
     <p align=right style="margin-right:40px">Salary:</p>
 </div>
-<form action="{% url 'employees_create' %}" method='GET'>
+<form action="{% url 'employees_create' %}" method='POST'>
+    {% csrf_token %}
     <div style="width: 50%;
            margin-left: 50%;
            padding-top:1%">
@@ -30,7 +31,7 @@
         </p>
 
         <p><input type="text" name="full_name" size="15" style="font-size: 16;"></p>
-        <p><input type="date" name="date_by"/>
+        <p><input type="date" name="date_of_birthday"/>
         <p><input type="text" name="salary" size="15" style="font-size: 16;"></p>
 
     </div>

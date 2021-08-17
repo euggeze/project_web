@@ -13,7 +13,8 @@
 <div style="width: 50%; float: left;padding-top:1%">
     <p align=right style="margin-right:40px">Name:</p>
 </div>
-<form action="{% url 'departments_create' %}" method='GET'>
+<form action="{% url 'departments_create' %}" method='POST'>
+    {% csrf_token %}
     <div style="width: 50%;
            margin-left: 50%;
            padding-top:1%">
@@ -33,5 +34,3 @@
     </div>
 </form>
 {% endblock %}
-</body>
-</html>

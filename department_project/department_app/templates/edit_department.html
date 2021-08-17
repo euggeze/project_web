@@ -16,7 +16,7 @@
 <div style="width: 50%; float: left;padding-top:1%">
     <p align=right style="margin-right:40px">Select department:</p>
 </div>
-<form action="{% url 'departments_edit' pk=data_department.id %}" method='GET'>
+<form action="{% url 'departments_edit' pk=data_department.id %}" method='POST'>
     {% csrf_token %}
     <div style="width: 50%;
            margin-left: 50%;

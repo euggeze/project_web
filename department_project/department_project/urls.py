@@ -18,7 +18,7 @@ from django.urls import path, include
 
 from department_app import urls
 from department_app.service import EmployeeTemplate, EmployeeEdit, EmployeeDelete, EmployeeCreate, \
-    DepartmentTemplate, DepartmentEdit, DepartmentDelete, DepartmentCreate
+    DepartmentTemplate, DepartmentDelete, DepartmentCreate, DepartmentEdit
 
 urlpatterns = [
     path('admin/', admin.site.urls),
