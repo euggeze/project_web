@@ -13,7 +13,7 @@ class EmployeeTemplate(ListView):
     model = Employee
     fields = '__all__'
     object_list = None
-
+    
     def get_context_data(self, *, object_list=None, **kwargs):
         """ Function for get data from api"""
         try:
@@ -48,7 +48,6 @@ class EmployeeCreate(CreateView):
     """ Template for view create employee"""
     model = Employee
     fields = '__all__'
-    object = None
 
     def get_success_url(self):
         """ Function for save page for success completed create"""
@@ -56,19 +55,16 @@ class EmployeeCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         """ Function for get data from api"""
-        kwargs.setdefault('view', self)
         try:
             departments = requests.get(reverse('department-list', request=self.request)).json()
         except ValueError:
             departments = requests.get(reverse('department-list', request=self.request))
-        kwargs.setdefault('data_department', departments)
-        if self.extra_context is not None:
-            kwargs.update(self.extra_context)
-        return kwargs
+        data = super().get_context_data(**kwargs)
+        data['data_department'] = departments
+        return data
 
     def post(self, request, *args, **kwargs):
         """ Function post for create employee"""
-        self.object = None
         form = self.get_form()
         if form.is_valid():
             employee = {'full_name': self.request.POST.get('full_name', None),
@@ -86,7 +82,6 @@ class EmployeeEdit(UpdateView):
     """ Template for view edit employee"""
     model = Employee
     fields = '__all__'
-    object = None
 
     def get_success_url(self):
         """ Function for save page for edit success"""
@@ -103,15 +98,13 @@ class EmployeeEdit(UpdateView):
                 reverse('employee-detail', request=self.request, args=[self.kwargs['pk']])).json()
         except ValueError:
             employee = requests.get(reverse('department-detail', request=self.request, args=[self.kwargs['pk']]))
-        kwargs.setdefault('data_employee', employee)
-        kwargs.setdefault('data_department', departments)
-        if 'form' not in kwargs:
-            kwargs['form'] = self.get_form()
-        return kwargs
+        data = super().get_context_data(**kwargs)
+        data['data_department'] = departments
+        data['data_employee'] = employee
+        return data
 
     def post(self, request, *args, **kwargs):
         """ Function post for edit employee"""
-        self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
             employee = {'full_name': self.request.POST.get('full_name', None),

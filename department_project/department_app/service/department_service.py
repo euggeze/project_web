@@ -11,7 +11,6 @@ class DepartmentTemplate(ListView):
     """ Template for view the list department"""
     model = Department
     fields = '__all__'
-    object_list = None
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """ Function for get data from api"""
@@ -19,18 +18,15 @@ class DepartmentTemplate(ListView):
             department = requests.get(reverse('department-list', request=self.request)).json()
         except ValueError:
             department = requests.get(reverse('department-list', request=self.request))
-        kwargs.setdefault('data_department', department)
-        kwargs.setdefault('view', self)
-        if self.extra_context is not None:
-            kwargs.update(self.extra_context)
-        return kwargs
+        data = super().get_context_data(**kwargs)
+        data['data_department'] = department
+        return data
 
 
 class DepartmentCreate(CreateView):
     """ Template for view create department"""
     model = Department
     fields = '__all__'
-    object = None
 
     def get_success_url(self):
         """ Function for saving page for creation success"""
@@ -38,7 +34,6 @@ class DepartmentCreate(CreateView):
 
     def post(self, request, *args, **kwargs):
         """ Function post for create department"""
-        self.object = None
         form = self.get_form()
         if form.is_valid():
             department = {'full_name': self.request.POST.get('full_name', None)}
@@ -52,7 +47,6 @@ class DepartmentEdit(UpdateView):
     """ Template for view save edit department"""
     model = Department
     fields = '__all__'
-    object = None
 
     def get_success_url(self):
         """ Function for save page for edit success"""
@@ -65,14 +59,12 @@ class DepartmentEdit(UpdateView):
                 reverse('department-detail', request=self.request, args=[self.kwargs['pk']])).json()
         except ValueError:
             department = requests.get(reverse('department-detail', request=self.request, args=[self.kwargs['pk']]))
-        kwargs.setdefault('data_department', department)
-        if 'form' not in kwargs:
-            kwargs['form'] = self.get_form()
-        return kwargs
+        data = super().get_context_data(**kwargs)
+        data['data_department'] = department
+        return data
 
     def post(self, request, *args, **kwargs):
         """ Function post for edit department"""
-        self.object = self.get_object()
         form = self.get_form()
         if form.is_valid():
             department = {'full_name': self.request.POST.get('full_name', None)}
