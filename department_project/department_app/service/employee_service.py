@@ -13,18 +13,16 @@ class EmployeeTemplate(ListView):
     model = Employee
     fields = '__all__'
     object_list = None
-    
+
     def get_context_data(self, *, object_list=None, **kwargs):
         """ Function for get data from api"""
         try:
             department = requests.get(reverse('department-list', request=self.request)).json()
         except ValueError:
             department = requests.get(reverse('department-list', request=self.request))
-        kwargs.setdefault('data_department', department)
-        kwargs.setdefault('view', self)
-        if self.extra_context is not None:
-            kwargs.update(self.extra_context)
-        return kwargs
+        data = super().get_context_data(**kwargs)
+        data['data_department'] = department
+        return data
 
     def get(self, request, *args, **kwargs):
         """ Function get for list employee"""
