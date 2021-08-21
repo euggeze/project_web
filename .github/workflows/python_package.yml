@@ -39,7 +39,6 @@ jobs:
           pip install -r requirements.txt
       - name: pylint check
         run: |
-          pylint setup.py
           pylint --load-plugins=pylint_django --django-settings-module=department_project.settings department_project/*
       - name: Install Coveralls       
         run:
