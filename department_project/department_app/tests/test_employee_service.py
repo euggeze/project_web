@@ -36,24 +36,37 @@ class EmployeeServiceTestCase(APITestCase):
         self.assertEqual(200, response.status_code)
 
     def test_delete_template(self, mocker):
-        self.adapter.register_uri('GET', reverse('employee-detail', args=[10]), json={'id': 10,
-                                                                                      'full_name': 'TEST',
-                                                                                      'date_of_birthday': '1999-09-09',
-                                                                                      'salary': 1250.50,
-                                                                                      'department': 1})
-        mocker.delete(reverse('employee-detail', args=[10]))
-        response = self.client.post(reverse('employees_delete'), data={'id': 10})
+        self.adapter.register_uri('GET', reverse('employee-detail', args=[1]), json={'id': 1,
+                                                                                     'full_name': 'TEST',
+                                                                                     'date_of_birthday': '1999-09-09',
+                                                                                     'salary': 1250.50,
+                                                                                     'department': 1})
+        mocker.delete(reverse('employee-detail', args=[1]))
+        response = self.client.post(reverse('employees_delete'), data={'id': 1})
         self.assertEqual(302, response.status_code)
 
-"""     def test_update_template(self, mocker):
-        self.adapter.register_uri('GET', reverse('employee-detail', args=[10]), json={'id': 10,
-                                                                                      'full_name': 'TEST',
-                                                                                      'date_of_birthday': '1999-09-09',
-                                                                                      'salary': 1250.50,
-                                                                                      'department': 1})
+    def test_update_template(self, mocker):
+        mocker.get(reverse('employee-detail', args=[1]), json={'id': 1,
+                                                               'full_name': 'TEST',
+                                                               'date_of_birthday': '1999-09-09',
+                                                               'salary': 1250.50,
+                                                               'department': 1})
         mocker.get(reverse('department-list'))
         mocker.get(reverse('department-detail', args=[1]))
-        mocker.get(reverse('employee-detail', args=[10]))
-        response = self.client.get(reverse('employees_edit', args=[10]))
+        response = self.client.get(reverse('employees_edit', args=[1]))
+        self.assertEqual(200, response.status_code)
+
+    def test_update_finish(self, mocker):
+        mocker.get(reverse('employee-detail', args=[1]), json={'id': 1,
+                                                               'full_name': 'TEST',
+                                                               'date_of_birthday': '1999-09-09',
+                                                               'salary': 1250.50,
+                                                               'department': 1})
+        mocker.get(reverse('department-list'))
+        mocker.get(reverse('department-detail', args=[1]))
+        mocker.put(reverse('employee-detail', args=[1]))
+        response = self.client.post(reverse('employees_edit', args=[1]), data={'full_name': 'TEST TEST',
+                                                                               'date_of_birthday': '1999-09-09',
+                                                                               'salary': 1251.50,
+                                                                               'department': 1})
         self.assertEqual(302, response.status_code)
-"""
