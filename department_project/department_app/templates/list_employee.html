@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_list.html' %}
 
 {% load static %}
 {% block javascript %}
@@ -66,11 +66,6 @@ function ajax_update_table(department='', start='', end=''){
 <script type="text/javascript" src="{% static 'js/check_box.js' %}"></script>
 
 {% endblock javascript %}
-
-{% block up_tab %}
-<a class="tab a_activate">Employees</a>
-<a class="tab a" , href="{% url 'departments_list' %}">Departments</a>
-{% endblock %}
 
 {% block selector %}
 

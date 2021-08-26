@@ -53,3 +53,10 @@ class DepartmentServiceTestCase(APITestCase):
         mocker.put(reverse('department-detail', args=[1]))
         response = self.client.post(reverse('departments_edit', args=[1]), data={'full_name': 'TEST TEST'})
         self.assertEqual(302, response.status_code)
+
+    def test_create_template_empty(self, mocker):
+        """Testing finish create empty Department template"""
+        mocker.post(reverse('department-list'))
+        response = self.client.post(
+            reverse('departments_create'), data={'id': 1, 'full_name': ''})
+        self.assertEqual(302, response.status_code)

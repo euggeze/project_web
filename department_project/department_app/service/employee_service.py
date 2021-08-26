@@ -16,10 +16,7 @@ class EmployeeTemplate(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """ Function for get data from api"""
-        try:
-            department = requests.get(reverse('department-list', request=self.request)).json()
-        except ValueError:
-            department = requests.get(reverse('department-list', request=self.request))
+        department = requests.get(reverse('department-list', request=self.request)).json()
         data = super().get_context_data(**kwargs)
         data['data_department'] = department
         return data
@@ -31,10 +28,7 @@ class EmployeeTemplate(ListView):
         start = request.GET.get("start", '')
         end = request.GET.get("end", '')
         filter_query = '?department=' + sel_department + '&start=' + start + '&end=' + end
-        try:
-            employees = requests.get(reverse('employee-list', request=self.request) + filter_query).json()
-        except ValueError:
-            employees = requests.get(reverse('employee-list', request=self.request) + filter_query)
+        employees = requests.get(reverse('employee-list', request=self.request) + filter_query).json()
         if request.is_ajax():
             args = {'data_employee_new': employees}
             return JsonResponse(args)
@@ -46,6 +40,7 @@ class EmployeeCreate(CreateView):
     """ Template for view create employee"""
     model = Employee
     fields = '__all__'
+    object = None
 
     def get_success_url(self):
         """ Function for save page for success completed create"""
@@ -53,10 +48,7 @@ class EmployeeCreate(CreateView):
 
     def get_context_data(self, **kwargs):
         """ Function for get data from api"""
-        try:
-            departments = requests.get(reverse('department-list', request=self.request)).json()
-        except ValueError:
-            departments = requests.get(reverse('department-list', request=self.request))
+        departments = requests.get(reverse('department-list', request=self.request)).json()
         data = super().get_context_data(**kwargs)
         data['data_department'] = departments
         return data
@@ -69,7 +61,6 @@ class EmployeeCreate(CreateView):
                         'date_of_birthday': self.request.POST.get('date_of_birthday', None),
                         'salary': self.request.POST.get('salary', None),
                         'department': self.request.POST.get('department', None)}
-            print(employee)
             requests.post(reverse('employee-list', request=self.request), data=employee)
             return HttpResponseRedirect(self.get_success_url())
         else:
@@ -80,6 +71,7 @@ class EmployeeEdit(UpdateView):
     """ Template for view edit employee"""
     model = Employee
     fields = '__all__'
+    object = None
 
     def get_success_url(self):
         """ Function for save page for edit success"""
@@ -87,15 +79,8 @@ class EmployeeEdit(UpdateView):
 
     def get_context_data(self, **kwargs):
         """ Function for get data from api"""
-        try:
-            departments = requests.get(reverse('department-list', request=self.request)).json()
-        except ValueError:
-            departments = requests.get(reverse('department-list', request=self.request))
-        try:
-            employee = requests.get(
-                reverse('employee-detail', request=self.request, args=[self.kwargs['pk']])).json()
-        except ValueError:
-            employee = requests.get(reverse('department-detail', request=self.request, args=[self.kwargs['pk']]))
+        departments = requests.get(reverse('department-list', request=self.request)).json()
+        employee = requests.get(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']])).json()
         data = super().get_context_data(**kwargs)
         data['data_department'] = departments
         data['data_employee'] = employee

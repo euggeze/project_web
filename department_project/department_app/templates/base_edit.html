@@ -1,16 +1,9 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Manager for department and employees</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'source.css' %}">
-    {% block javascript %}
-    {% endblock %}
-</head>
-<body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% extends 'base.html' %}
 
+{% block body %}
+<body>
+{% block javascript %}
+{% endblock %}
 <div class="tab">
     {% block up_tab %}
     {% endblock %}
@@ -23,6 +16,5 @@
 
 {% block labels %}
 {% endblock %}
-</table>
 </body>
-</html>
+{% endblock %}

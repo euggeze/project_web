@@ -14,10 +14,7 @@ class DepartmentTemplate(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         """ Function for get data from api"""
-        try:
-            department = requests.get(reverse('department-list', request=self.request)).json()
-        except ValueError:
-            department = requests.get(reverse('department-list', request=self.request))
+        department = requests.get(reverse('department-list', request=self.request)).json()
         data = super().get_context_data(**kwargs)
         data['data_department'] = department
         return data
@@ -27,6 +24,7 @@ class DepartmentCreate(CreateView):
     """ Template for view create department"""
     model = Department
     fields = '__all__'
+    object = None
 
     def get_success_url(self):
         """ Function for saving page for creation success"""
@@ -47,6 +45,7 @@ class DepartmentEdit(UpdateView):
     """ Template for view save edit department"""
     model = Department
     fields = '__all__'
+    object = None
 
     def get_success_url(self):
         """ Function for save page for edit success"""
@@ -54,11 +53,7 @@ class DepartmentEdit(UpdateView):
 
     def get_context_data(self, **kwargs):
         """ Function for get data from api"""
-        try:
-            department = requests.get(
-                reverse('department-detail', request=self.request, args=[self.kwargs['pk']])).json()
-        except ValueError:
-            department = requests.get(reverse('department-detail', request=self.request, args=[self.kwargs['pk']]))
+        department = requests.get(reverse('department-detail', request=self.request, args=[self.kwargs['pk']])).json()
         data = super().get_context_data(**kwargs)
         data['data_department'] = department
         return data
@@ -89,4 +84,3 @@ class DepartmentDelete(DeleteView):
         id_department = self.request.POST.get("id", None)
         requests.delete(reverse('department-detail', request=self.request, args=[id_department]))
         return HttpResponseRedirect(success_url)
-
