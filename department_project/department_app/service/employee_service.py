@@ -13,9 +13,9 @@ class EmployeeTemplate(ListView):
     """ Template for view the list employee"""
     model = Employee
     fields = '__all__'
-    object_list = None  # pylint: disable=unused-argument
+    object_list = None
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         return DepartmentTemplate.get_context_data(self, **kwargs)
 
     def get(self, request, *args, **kwargs):

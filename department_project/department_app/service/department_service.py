@@ -13,7 +13,7 @@ class DepartmentTemplate(ListView):
     model = Department
     fields = '__all__'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, **kwargs):
         """ Function for get data from api"""
         department = requests.get(reverse('department-list', request=self.request)).json()
         data = MultipleObjectMixin.get_context_data(self, **kwargs)
