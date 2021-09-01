@@ -22,6 +22,18 @@ class EmployeeServiceTestCase(TestCase):
         response = self.client.get(reverse('employees_list'))
         self.assertEqual(200, response.status_code)
 
+    def test_list_selected(self, mocker):
+        """Testing list Employee template"""
+        mocker.get(reverse('department-list'), json=[{'id': 1, 'full_name': 'TEST'},
+                                                     {'id': 2, 'full_name': 'TEST'}])
+        mocker.get(reverse('employee-list'), json=[{'id': 1,
+                                                    'full_name': 'TEST',
+                                                    'date_of_birthday': '1999-09-09',
+                                                    'salary': 1250.50,
+                                                    'department': 1}])
+        response = self.client.get(reverse('employees_list'), HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(200, response.status_code)
+
     def test_create_template(self, mocker):
         """Testing create Employee template"""
         mocker.get(reverse('department-list'), json=[{'id': 1, 'full_name': 'TEST'},
