@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body>
+{% block javascript %}
+{% endblock javascript %}
+<div class="tab">
+    {% block up_tab %}
+    <a class="tab a_activate">Employees</a>
+    <a class="tab a" , href="{% url 'departments_list' %}">Departments</a>
+    {% endblock %}
+</div>
+
+<div class="green_div">
+    <div style="width: 82%; float: left;padding-top:1%">
+        {% block selector %}
+        {% endblock %}
+    </div>
+    <div style="width: 25%;
+             margin-left: 75%;
+             padding-top:1%">
+        {% block add_button %}
+        {% endblock %}
+    </div>
+    </p>
+</div>
+
+
+{% block yellow_div %}
+{% endblock %}
+<br><br>
+
+<table class="zebra_table" id="table_custom">
+    {% block table %}
+    {% endblock %}
+</table>
+{% endblock %}
+</body>

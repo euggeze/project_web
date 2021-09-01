@@ -1,0 +1,34 @@
+{% extends 'base_list.html' %}
+
+{% load static %}
+
+{% block javascript %}
+<script>
+    var delete_variable = "{% url 'departments_delete' %}";
+</script>
+<script type="text/javascript" src="{% static 'js/deleting.js' %}"></script>
+{% endblock %}
+
+{% block up_tab %}
+<a class="tab a" href="{% url 'employees_list' %}">Employees</a>
+<a class="tab a_activate">Departments</a>
+{% endblock %}
+
+{% block add_button %}<a class="button green_button" href="{% url 'departments_create' %}">Add</a>
+{% endblock %}
+
+{% block table %}
+<tr>
+    <th>Name</th>
+    <th width="75"></th>
+</tr>
+{% for d in data_department %}
+<tr>
+    <td>{{ d.full_name }}</td>
+    <td><a style="cursor: pointer;" onclick="delete_func({{d.id}})"><img src="{% static 'trash.png' %}" width="32"
+                                                                         height="32"></a>
+        <a style="cursor: pointer;" href="{% url 'departments_edit' pk=d.id %}"><img src="{% static 'pencil.png' %}"
+                                                                                     width="32" height="32"></a></td>
+</tr>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base_edit.html' %}
+
+{% load static %}
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/checking_data.js' %}"></script>
+{% endblock %}
+
+<br><br>
+
+{% block labels %}
+<div style="width: 50%; float: left;padding-top:1%">
+    <p align=right style="margin-right:40px">Select department:</p>
+    <p align=right style="margin-right:40px">Name:</p>
+    <p align=right style="margin-right:40px">Date of birthday:</p>
+    <p align=right style="margin-right:40px">Salary:</p>
+</div>
+<form action="{% url 'employees_edit' pk=data_employee.id %}" method='POST'>
+    {% csrf_token %}
+    <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">
+
+        <p>
+            <select onchange="" name="department" id="id_select">
+                {% for d in data_department %}
+                {% if d.id == data_employee.department %}
+                <option selected="selected" value="{{ d.id }}"> {{ d.full_name }}</option>
+                {% else %}
+                <option value="{{ d.id }}"> {{ d.full_name }}</option>
+                {% endif %}
+                {% endfor %}
+            </select>
+        </p>
+
+        <p><input type="text" id="id_name" name="full_name" size="15" style="font-size: 16;"
+                  value="{{ data_employee.full_name }}"></p>
+        <p><input type="date" id="id_date" name="date_of_birthday" value="{{ data_employee.date_of_birthday }}"/>
+        <p><input type="text" id="id_salary" name="salary" size="15" style="font-size: 16;"
+                  value="{{ data_employee.salary }}"></p>
+
+    </div>
+    <div style="width: 50%; float: left;padding-top:1%">
+        <p align=right style="margin-right: 40px;"><a class="button red_button"
+                                                      onclick="check_changed_employee({{ data_employee }}, {% url 'employees_list' %})">Cancel</a></p>
+    </div>
+    <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">
+        <p align=left style="margin-left:40px"><input style=" width: 116px;  height: 60px;" class="button green_button"
+                                                      type="submit" value="Save"></p>
+    </div>
+</form>
+{% endblock %}

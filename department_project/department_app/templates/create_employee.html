@@ -1,0 +1,44 @@
+{% extends 'base_create.html' %}
+
+{% load static %}
+
+<br><br>
+
+{% block labels %}
+<div style="width: 50%; float: left;padding-top:1%">
+    <p align=right style="margin-right:40px">Select department:</p>
+    <p align=right style="margin-right:40px">Name:</p>
+    <p align=right style="margin-right:40px">Date of birthday:</p>
+    <p align=right style="margin-right:40px">Salary:</p>
+</div>
+<form action="{% url 'employees_create' %}" method='POST'>
+    {% csrf_token %}
+    <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">
+
+        <p>
+            <select onchange="" name="department" id="id_select">
+                {% for d in data_department %}
+                <option value="{{ d.id }}"> {{ d.full_name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+
+        <p><input type="text" name="full_name" size="15" style="font-size: 16;"></p>
+        <p><input type="date" name="date_of_birthday"/>
+        <p><input type="text" name="salary" size="15" style="font-size: 16;"></p>
+
+    </div>
+    <div style="width: 50%; float: left;padding-top:1%">
+        <p align=right style="margin-right: 40px;"><a class="button red_button"
+                                                      href="{% url 'employees_list' %}">Cancel</a></p>
+    </div>
+    <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">
+        <p align=left style="margin-left:40px"><input style=" width: 116px;  height: 60px;" class="button green_button"
+                                                      type="submit" value="Save"></p>
+    </div>
+</form>
+{% endblock %}

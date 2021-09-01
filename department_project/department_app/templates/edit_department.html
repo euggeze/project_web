@@ -1,0 +1,41 @@
+{% extends 'base_edit.html' %}
+
+{% load static %}
+{% block javascript %}
+<script type="text/javascript" src="{% static 'js/checking_data.js' %}"></script>
+{% endblock %}
+
+{% block up_tab %}
+<a class="tab a" href="{% url 'employees_list' %}">Employees</a>
+<a class="tab a_activate" , href="{% url 'departments_list' %}">Departments</a>
+{% endblock %}
+
+<br><br>
+
+{% block labels %}
+<div style="width: 50%; float: left;padding-top:1%">
+    <p align=right style="margin-right:40px">Select department:</p>
+</div>
+<form action="{% url 'departments_edit' pk=data_department.id %}" method='POST'>
+    {% csrf_token %}
+    <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">
+
+        <p><input type="text" id="id_name" name="full_name" size="15" style="font-size: 16;"
+                  value="{{ data_department.full_name }}"></p>
+
+    </div>
+    <div style="width: 50%; float: left;padding-top:1%">
+        <p align=right style="margin-right: 40px;"><a class="button red_button"
+                                                      onclick="check_changed_department({{ data_department }}, {% url 'departments_list' %})">Cancel</a>
+        </p>
+    </div>
+    <div style="width: 50%;
+           margin-left: 50%;
+           padding-top:1%">
+        <p align=left style="margin-left:40px"><input style=" width: 116px;  height: 60px;" class="button green_button"
+                                                      type="submit" value="Save"></p>
+    </div>
+</form>
+{% endblock %}

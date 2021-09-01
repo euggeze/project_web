@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<body>
+
+<div class="tab">
+    {% block up_tab %}
+    <a class="tab a_activate">Employees</a>
+    <a class="tab a" , href="{% url 'departments_list' %}">Departments</a>
+    {% endblock %}
+</div>
+
+<div class="green_div">
+    <p align="center" style="font-size:30px"> Create</p>
+</div>
+<br><br>
+
+{% block labels %}
+{% endblock %}
+</table>
+</body>
+{% endblock %}
