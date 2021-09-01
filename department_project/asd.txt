@@ -1,1 +1,0 @@
-<HttpResponseRedirect status_code=302, "text/html; charset=utf-8", url="/department/">
