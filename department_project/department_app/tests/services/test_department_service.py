@@ -67,4 +67,3 @@ class DepartmentServiceTestCase(TestCase):
         mocker.put(reverse('department-detail', args=[1]))
         response = self.client.post(reverse('departments_edit', args=[1]), data={'full_name': name})
         self.assertEqual(200, response.status_code)
-        

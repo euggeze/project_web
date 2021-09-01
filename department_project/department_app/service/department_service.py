@@ -2,6 +2,7 @@
 import requests
 from django.http import HttpResponseRedirect
 from django.views.generic import DeleteView, CreateView, ListView, UpdateView
+from django.views.generic.list import MultipleObjectMixin
 from rest_framework.reverse import reverse
 
 from department_app.models import Department
@@ -15,7 +16,7 @@ class DepartmentTemplate(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         """ Function for get data from api"""
         department = requests.get(reverse('department-list', request=self.request)).json()
-        data = super().get_context_data(**kwargs)
+        data = MultipleObjectMixin.get_context_data(self, **kwargs)
         data['data_department'] = department
         return data
 
@@ -37,8 +38,7 @@ class DepartmentCreate(CreateView):
             department = {'full_name': self.request.POST.get('full_name', None)}
             requests.post(reverse('department-list', request=self.request), data=department)
             return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)
 
 
 class DepartmentEdit(UpdateView):
@@ -65,8 +65,7 @@ class DepartmentEdit(UpdateView):
             department = {'full_name': self.request.POST.get('full_name', None)}
             requests.put(reverse('department-detail', request=self.request, args=[self.kwargs['pk']]), data=department)
             return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)
 
 
 class DepartmentDelete(DeleteView):

@@ -6,20 +6,17 @@ from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from rest_framework.reverse import reverse
 
 from department_app.models import Employee
+from department_app.service.department_service import DepartmentTemplate
 
 
 class EmployeeTemplate(ListView):
     """ Template for view the list employee"""
     model = Employee
     fields = '__all__'
-    object_list = None
+    object_list = None  # pylint: disable=unused-argument
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        """ Function for get data from api"""
-        department = requests.get(reverse('department-list', request=self.request)).json()
-        data = super().get_context_data(**kwargs)
-        data['data_department'] = department
-        return data
+        return DepartmentTemplate.get_context_data(self, **kwargs)
 
     def get(self, request, *args, **kwargs):
         """ Function get for list employee"""
@@ -63,8 +60,7 @@ class EmployeeCreate(CreateView):
                         'department': self.request.POST.get('department', None)}
             requests.post(reverse('employee-list', request=self.request), data=employee)
             return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)
 
 
 class EmployeeEdit(UpdateView):
@@ -96,8 +92,7 @@ class EmployeeEdit(UpdateView):
                         'department': self.request.POST.get('department', None)}
             requests.put(reverse('employee-detail', request=self.request, args=[self.kwargs['pk']]), data=employee)
             return HttpResponseRedirect(self.get_success_url())
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)
 
 
 class EmployeeDelete(DeleteView):
