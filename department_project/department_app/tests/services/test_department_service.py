@@ -47,12 +47,14 @@ class DepartmentServiceTestCase(TestCase):
         self.assertURLEqual(response.url, '/department/')
 
     def test_update_template(self, mocker):
-        mocker.get(reverse('department-detail', args=[1]), json={'id': 1,
-                                                                 'full_name': 'TEST'})
+        checking_data = {'id': 1,
+                         'full_name': 'TEST'}
+        mocker.get(reverse('department-detail', args=[1]), json=checking_data)
         mocker.get(reverse('department-list'))
         response = self.client.get(reverse('departments_edit', args=[1]))
         self.assertEqual(200, response.status_code)
         self.assertTemplateUsed(response, 'edit_department.html')
+        self.assertEqual(checking_data, response.context_data['data_department'])
 
     def test_update_finish(self, mocker):
         mocker.get(reverse('department-detail', args=[1]), json={'id': 1,
