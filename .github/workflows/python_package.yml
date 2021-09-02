@@ -68,4 +68,10 @@ jobs:
           release_name: Release v0.10
         env:
           GITHUB_TOKEN: ${{ github.token }}
-
+      - name: Update Heroku
+        if: github.event.pull_request.merged == true
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "department-manager" #Must be unique in Heroku
+          heroku_email: "euggeze@gmail.com"
