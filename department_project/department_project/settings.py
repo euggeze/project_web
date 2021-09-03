@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
+
 from pathlib import Path
+
+import dj_database_url
 
 LOGGING = {
     'version': 1,
@@ -46,7 +49,7 @@ SECRET_KEY = 'django-insecure-*)2-+vo6d1b0!%xwyv6ccz91&*0qe!21t(4jo@w9kp8_l&%01r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['department-manager.herokuapp.com']
+ALLOWED_HOSTS = ['department-manager.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -105,6 +108,9 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
